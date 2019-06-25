@@ -1,8 +1,8 @@
 <template>
     <div>
-        <nav-bar />
         <div>
             <page-content>
+            <nav-bar />
                 <slot />
             </page-content>
         </div>
