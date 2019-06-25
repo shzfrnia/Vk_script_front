@@ -16,27 +16,39 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import('./views/About.vue')
     },
     {
       path: '/one',
       name: 'One',
-      component: () => import('./views/OnePage.vue')
+      component: () => import('./views/OnePage.vue'),
+      meta: {
+        bkColor: "#3EAF6F"
+      }
     },
     {
       path: '/second',
       name: 'Second',
-      component: () => import('./views/SecondPage.vue')
+      component: () => import('./views/SecondPage.vue'),
+      meta: {
+        bkColor: "#BE0031"
+      }
     },
     {
       path: '/third',
       name: 'Third',
-      component: () => import('./views/ThirdPage.vue')
+      component: () => import('./views/ThirdPage.vue'),
+      meta: {
+        bkColor: "#8E00AC"
+      }
     },
     {
       path: '/fourth',
       name: 'Fourth',
-      component: () => import('./views/FourthPage.vue')
+      component: () => import('./views/FourthPage.vue'),
+      meta: {
+        bkColor: "#DE9B00"
+      }
     }
   ]
 })
