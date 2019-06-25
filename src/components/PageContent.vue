@@ -1,20 +1,23 @@
 <template>
-    <div class="page-content">
-        <slot>
-
-        </slot>
+    <div :style="{'background-color': selectedBgColor}" class="page-content">
+        <slot />
     </div>
 </template>
 
 <script>
+
   export default {
-    name: "PageContent"
+    name: "PageContent",
+    computed: {
+      selectedBgColor() {
+        return this.$route.meta.bkColor
+      }
+    }
   }
 </script>
 
 <style scoped>
     .page-content {
-        background: red;
         height: 100vh;
         overflow: auto;
     }
