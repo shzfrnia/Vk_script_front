@@ -26,7 +26,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        transition: 0.2s;
+        transition: 0.4s;
         height: 100vh;
     }
 </style>

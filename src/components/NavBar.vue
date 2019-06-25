@@ -1,11 +1,11 @@
 <template>
     <div id="nav">
         <div class="my-btn-container">
-            <div class="my-btn" :key="route.icon" v-for="(route, index) in routes">
-                <router-link @click="selectRoute(index)" :style="{color: route.bkColor}" :to="route.route">
-                    <i :class="['fas', `fa-${route.icon}`]"></i>
-                </router-link>
-            </div>
+            <router-link :key="route.icon" :to="route.route" v-for="route in routes">
+                <div class="my-btn" :key="route.icon">
+                    <i :style="{color: route.bkColor}" :class="['fas', `fa-${route.icon}`]"></i>
+                </div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -64,5 +64,9 @@
         text-align: center;
         line-height: 50px;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        transition: 0.5s;
+    }
+    .router-link-active .my-btn{
+        width: 80px;
     }
 </style>
