@@ -1,24 +1,9 @@
 <template>
     <div id="nav">
         <div class="my-btn-container">
-            <div class="my-btn">
-                <router-link :to="{name: 'One'}">
-                    <i class="fas fa-comment"></i>
-                </router-link>
-            </div>
-            <div class="my-btn">
-                <router-link :to="{name: 'Second'}">
-                    <i class="fas fa-user"></i>
-                </router-link>
-            </div>
-            <div class="my-btn">
-                <router-link :to="{name: 'Third'}">
-                    <i class="fas fa-map-marker"></i>
-                </router-link>
-            </div>
-            <div class="my-btn">
-                <router-link :to="{name: 'Fourth'}">
-                    <i class="fas fa-cog"></i>
+            <div class="my-btn" :key="route.icon" v-for="(route, index) in routes">
+                <router-link @click="selectRoute(index)" :style="{color: route.bkColor}" :to="route.route">
+                    <i :class="['fas', `fa-${route.icon}`]"></i>
                 </router-link>
             </div>
         </div>
@@ -27,14 +12,40 @@
 
 <script>
   export default {
-    name: "NavBar"
+    name: "NavBar",
+    data() {
+      return {
+        routes: [
+          {
+            icon: 'comment',
+            route: '/one',
+            bkColor: '#3EAF6F'
+          },
+          {
+            icon: 'user',
+            route: '/second',
+            bkColor : '#BE0031'
+          },
+          {
+            icon: 'map-marker',
+            route: '/third',
+            bkColor: '#8E00AC'
+          },
+          {
+            icon: 'cog',
+            route: '/fourth',
+            bkColor: '#DE9B00'
+          }
+        ]
+      }
+    }
   }
 </script>
 
 <style scoped>
     .my-btn-container {
         display: flex;
-        background-color: black;
+        /*background-color: black;*/
         /*padding-top: 150px;*/
         /*padding-bottom: 150px;*/
         justify-content: center;
