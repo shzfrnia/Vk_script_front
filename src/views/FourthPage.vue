@@ -1,24 +1,13 @@
 <template>
-    <component :is="layout">
+    <div>
         <h1>FUCK YOU</h1>
-    </component>
+    </div>
 </template>
 
 <script>
-  import PageContent from "../components/PageContent"
-  import NavBar from "../components/NavBar"
 
   export default {
     name: "FourthPage",
-    components: {
-      PageContent,
-      NavBar
-    },
-    data() {
-      return {
-        layout: 'default-layout'
-      }
-    }
   }
 </script>
 

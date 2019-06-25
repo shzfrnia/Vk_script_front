@@ -1,24 +1,12 @@
 <template>
-    <component :is="layout">
+    <div>
         <h1>Ya hz chto eto</h1>
-    </component>
+    </div>
 </template>
 
 <script>
-  import PageContent from "../components/PageContent"
-  import NavBar from "../components/NavBar"
-
   export default {
-    name: "ThirdPage",
-    components: {
-      PageContent,
-      NavBar
-    },
-    data() {
-      return {
-        layout: 'default-layout'
-      }
-    }
+    name: "ThirdPage"
   }
 </script>
 

@@ -4,11 +4,9 @@ import router from './router'
 import store from './store'
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Default from './views/Default'
 
 Vue.config.productionTip = false
 
-Vue.component('default-layout', Default);
 
 new Vue({
   router,
