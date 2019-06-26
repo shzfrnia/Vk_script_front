@@ -17,7 +17,7 @@
       return {
         routes: [
           {
-            icon: 'comment',
+            icon: 'user-circle',
             route: '/one',
             bkColor: '#3EAF6F'
           },
