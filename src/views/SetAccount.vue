@@ -22,7 +22,7 @@
 <style scoped>
     .md-field:after {
         height: 2px;
-        background: gray;
+        background: black;
     }
     .md-input {
         text-align: center;
