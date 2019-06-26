@@ -1,7 +1,7 @@
 <template>
   <div :style="{'background-color': selectedBgColor}" id="app">
       <nav-bar></nav-bar>
-      <div class="container">
+      <div style="display: flex; height: 100%;" class="container">
           <transition name="component-fade" mode="out-in">
             <router-view/>
           </transition>
@@ -33,6 +33,8 @@
         transition: 0.4s;
         height: 100vh;
         overflow: auto;
+        display: flex;
+        flex-direction: column;
     }
 
     .component-fade-enter-active, .component-fade-leave-active {

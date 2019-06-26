@@ -21,7 +21,7 @@ export default new Router({
     {
       path: '/one',
       name: 'One',
-      component: () => import('./views/OnePage.vue'),
+      component: () => import('./views/SetAccount.vue'),
       meta: {
         bkColor: "#3EAF6F"
       }
