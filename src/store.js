@@ -10,6 +10,7 @@ export default new Vuex.Store({
     session: {
       userIds: localStorage.getItem('userIds') || '',
       userName: localStorage.getItem('userName') || '',
+      avatar: localStorage.getItem('avatar') || '',
       account: {}
     },
     friendList: [],
@@ -29,13 +30,18 @@ export default new Vuex.Store({
       const id = account.id
       state.session.userIds = id
       state.session.userName = fullName
+      state.session.avatar = account.avatar
       state.session.account = account
       localStorage.setItem('userIds', id)
       localStorage.setItem('userName', fullName)
+      localStorage.setItem('avatar', account.avatar)
     },
     resetAccount(state) {
       state.session.userIds = ''
       state.session.userName = ''
+      state.session.avatar = ''
+      state.session.account = {}
+      localStorage.removeItem('avatar')
       localStorage.removeItem('userIds')
       localStorage.removeItem('userName')
     },
