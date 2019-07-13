@@ -1,12 +1,13 @@
 export const FakeUser = {
-    days_offline: null,
-    first_name: 'Mikhail',
-    id: 135480774,
-    is_deactivated: null,
-    is_online: false,
-    last_name: 'Ulyakov',
-    last_seen: null,
-    link: 'https://vk.com/id135480774'
+  avatar: 'https://pp.userapi.com/c853424/v853424075/6d95a/5MU6lG3ei0c.jpg?ava=1',
+  days_offline: null,
+  first_name: 'Mikhail',
+  id: 135480774,
+  is_deactivated: null,
+  is_online: true,
+  last_name: 'Ulyakov',
+  last_seen: null,
+  link: 'https://vk.com/id135480774'
 }
 
 export const FakeFriends = [
