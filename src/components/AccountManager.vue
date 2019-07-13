@@ -1,10 +1,10 @@
 <template>
-    <router-link :to="{name: 'home'}">
+    <router-link id="link" :to="{name: 'home'}">
         <div style="overflow: hidden;" class="my-btn" :style="{'width': widthButton}">
             <avatar v-if="$store.getters.accountIsSet" :url="$store.state.session.avatar"></avatar>
             <i v-else class="fas fa-user"></i>
             <transition name='fade'>
-                <p v-show="nameIsShow">{{userName}}</p>
+                <p id="nickname" v-show="nameIsShow">{{userName}}</p>
             </transition>
         </div>
     </router-link>
@@ -90,4 +90,14 @@
     .router-link-exact-active .my-btn{
         width: 80px;
     }
+
+    @media screen and (max-width: 530px) {
+        #nickname {
+            display: none;
+        }
+        #link .my-btn {
+            width: 50px !important;
+        }
+    }
+
 </style>
