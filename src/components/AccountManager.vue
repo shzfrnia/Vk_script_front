@@ -1,18 +1,24 @@
 <template>
     <router-link :to="{name: 'home'}">
         <div style="overflow: hidden;" class="my-btn" :style="{'width': widthButton}">
-            <i class="fas fa-user"></i>
+            <avatar v-if="$store.getters.accountIsSet" :url="$store.state.session.avatar"></avatar>
+            <i v-else class="fas fa-user"></i>
             <transition name='fade'>
-                <p class="inline" v-show="nameIsShow">{{userName}}</p>
+                <p v-show="nameIsShow">{{userName}}</p>
             </transition>
         </div>
     </router-link>
 </template>
 
 <script>
+    import Avatar from '../components/Avatar'
+
     export default {
       name: "AccountManager",
-        computed: {
+      components: {
+        Avatar
+      },
+      computed: {
           routeIsActive() {
             return this.$route.path === '/'
           },
@@ -40,7 +46,7 @@
 
 <style scoped>
     .fade-enter-active {
-        transition: opacity 1.3s;
+        transition: opacity 2.7s;
     }
 
     .fade-leave-active {
@@ -50,14 +56,11 @@
         opacity: 0;
     }
 
-    .inline {
-        margin-left: 10px;
-        display: inline;
-    }
-
     .my-btn {
-        display: inline-block;
+        display: flex;
         cursor: pointer;
+        justify-content: center;
+        align-items: center;
         width: 50px;
         height: 50px;
         margin: 5px;
@@ -70,6 +73,18 @@
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         transition: 0.5s;
         overflow: hidden;
+    }
+
+    .my-btn p {
+        margin: 0 0 0 10px;
+    }
+
+    .md-avatar {
+        margin: 0;
+    }
+
+    a {
+        text-decoration: none !important;
     }
 
     .router-link-exact-active .my-btn{
