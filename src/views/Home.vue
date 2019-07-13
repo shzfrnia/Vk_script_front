@@ -21,8 +21,7 @@
     name: "home",
     data() {
       return {
-        account_link: '',
-        fetchInterval: null
+        account_link: ''
       }
     },
     computed: {
@@ -47,15 +46,11 @@
     },
     beforeRouteLeave(to, from, next) {
       this.clearError()
-      window.clearInterval(this.fetchInterval)
       next()
     },
     async created() {
       if (this.$store.getters.accountIsSet) {
-        const userIds = this.$store.state.session.userIds
-        await this.$store.dispatch('fetchAllFriends', userIds)
-        this.fetchInterval = window.setInterval(
-            () => this.$store.dispatch('fetchAllFriends', userIds), 5000)
+        await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
       }
     }
   }
