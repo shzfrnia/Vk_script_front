@@ -12,12 +12,6 @@
 <script>
     export default {
       name: "AccountManager",
-        props: {
-          userName: {
-            type: String,
-            required: true
-          }
-        },
         computed: {
           routeIsActive() {
             return this.$route.path === '/'
@@ -36,6 +30,9 @@
               return 80 + 'px'
 
             return 50 + 'px'
+          },
+          userName() {
+            return this.$store.getters.accountName
           }
         },
     }

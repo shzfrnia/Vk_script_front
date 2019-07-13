@@ -1,7 +1,7 @@
 <template>
     <div id="nav">
         <div class="my-btn-container">
-            <account-manager :user-name="'Hello world'"></account-manager>
+            <account-manager></account-manager>
             <router-link :to="{name: 'banned'}">
                 <div class="my-btn">
                     <i style="color: red;" class="fas fa-map-marker"></i>
