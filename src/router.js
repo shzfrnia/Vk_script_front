@@ -11,12 +11,18 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        bkColor: "#3EAF6F"
+      }
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('./views/About.vue')
+      path: '/banned_friends',
+      name: 'banned',
+      component: () => import('./views/About.vue'),
+      meta: {
+        bkColor: "#8E00AC"
+      }
     },
     {
       path: '/one',
