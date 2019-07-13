@@ -2,7 +2,7 @@
     <div class="media">
         <img height="50" width="50" class="mr-3 image-around" alt="...">
         <div class="media-body">
-            <h5 class="mt-0 text-left">{{fullName}}</h5>
+            <h5 class="mt-0 text-left">{{account.first_name}} {{account.last_name}}</h5>
         </div>
     </div>
 </template>
@@ -11,10 +11,7 @@
     export default {
         name: "UserCard",
         props: {
-            fullName: {
-                type: String,
-                require: true
-            }
+            account: Object
         }
     }
 </script>
