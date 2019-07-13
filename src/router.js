@@ -19,31 +19,23 @@ export default new Router({
     {
       path: '/banned_friends',
       name: 'banned',
-      component: () => import('./views/About.vue'),
+      component: () => import('./views/Banned.vue'),
       meta: {
         bkColor: "#8E00AC"
       }
     },
     {
-      path: '/second',
-      name: 'Second',
-      component: () => import('./views/SecondPage.vue'),
+      path: '/deleted_friends',
+      name: 'deleted',
+      component: () => import('./views/Deleted.vue'),
       meta: {
         bkColor: "#BE0031"
       }
     },
     {
-      path: '/third',
-      name: 'Third',
-      component: () => import('./views/ThirdPage.vue'),
-      meta: {
-        bkColor: "#8E00AC"
-      }
-    },
-    {
-      path: '/fourth',
-      name: 'Fourth',
-      component: () => import('./views/FourthPage.vue'),
+      path: '/abandoned_friends',
+      name: 'abandoned',
+      component: () => import('./views/Abandoned.vue'),
       meta: {
         bkColor: "#DE9B00"
       }

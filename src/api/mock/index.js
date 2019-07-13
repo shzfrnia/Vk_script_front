@@ -11,8 +11,26 @@ export class UserAPI {
         }
     }
 
-    static async getFriends(user_ids) {
-      if(UserAPI.foo()) {
+    static async getBannedFriends(user_ids) {
+      if (UserAPI.foo()) {
+        const friends = FakeFriends
+        return friends
+      } else {
+        throw {error: "Something went wrong"}
+      }
+    }
+
+    static async getDeletedFriends(user_ids) {
+      if (UserAPI.foo()) {
+        const friends = FakeFriends
+        return friends
+      } else {
+        throw {error: "Something went wrong"}
+      }
+    }
+
+    static async getAbandonedFriends(user_ids) {
+      if (UserAPI.foo()) {
         const friends = FakeFriends
         return friends
       } else {
