@@ -1,20 +1,30 @@
 <template>
-    <div class="user-card-wrapper">
-        <avatar :url="account.avatar"></avatar>
-        <div class="media-body">
-            <h5 class="mt-0 text-left">{{account.first_name}} {{account.last_name}}</h5>
-        </div>
-    </div>
+    <md-card md-with-hover>
+        <!--   HERE ANIMATION         -->
+        <md-ripple>
+            <!--                -->
+            <md-card-header>
+                <md-card-media>
+                    <img :src="account.avatar" alt="People">
+                </md-card-media>
+                <md-card-header-text>
+                    <div class="md-title">{{account.first_name}} {{account.last_name}}</div>
+                    <!--                    <div class="md-subhead">Normal size</div>-->
+                </md-card-header-text>
+
+            </md-card-header>
+            <!--            <md-card-actions>-->
+            <!--                <md-button>Action</md-button>-->
+            <!--                <md-button>Action</md-button>-->
+            <!--            </md-card-actions>-->
+        </md-ripple>
+    </md-card>
 </template>
 
 <script>
-    import Avatar from '../components/Avatar'
 
     export default {
       name: "UserCard",
-      components: {
-        Avatar
-      },
       props: {
         account: Object
       }
@@ -22,8 +32,8 @@
 </script>
 
 <style scoped>
-    .user-card-wrapper {
-        width: 100%;
-        height: 100px;
+    .md-card {
+        background: white;
+        height: 110px;
     }
 </style>
