@@ -39,9 +39,8 @@
 
     .my-btn-container {
         display: flex;
-        /*background-color: black;*/
-        /*padding-top: 150px;*/
-        /*padding-bottom: 150px;*/
+        min-height: 70px;
+        align-items: center;
         justify-content: center;
     }
 
