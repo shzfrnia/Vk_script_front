@@ -1,25 +1,39 @@
 <template>
-    <div class="media">
-        <img height="50" width="50" class="mr-3 image-around" alt="...">
-        <div class="media-body">
-            <h5 class="mt-0 text-left">{{account.first_name}} {{account.last_name}}</h5>
-        </div>
-    </div>
+    <md-card md-with-hover>
+        <!--   HERE ANIMATION         -->
+        <md-ripple>
+            <!--                -->
+            <md-card-header>
+                <md-card-media>
+                    <img :src="account.avatar" alt="People">
+                </md-card-media>
+                <md-card-header-text>
+                    <div class="md-title">{{account.first_name}} {{account.last_name}}</div>
+                    <!--                    <div class="md-subhead">Normal size</div>-->
+                </md-card-header-text>
+
+            </md-card-header>
+            <!--            <md-card-actions>-->
+            <!--                <md-button>Action</md-button>-->
+            <!--                <md-button>Action</md-button>-->
+            <!--            </md-card-actions>-->
+        </md-ripple>
+    </md-card>
 </template>
 
 <script>
+
     export default {
-        name: "UserCard",
-        props: {
-            account: Object
-        }
+      name: "UserCard",
+      props: {
+        account: Object
+      }
     }
 </script>
 
 <style scoped>
-    .image-around {
-        -webkit-border-radius: 100px;
-        -moz-border-radius: 100px;
-        border-radius: 100px;
+    .md-card {
+        background: white;
+        height: 110px;
     }
 </style>
