@@ -1,12 +1,22 @@
 <template>
     <div>
-        <h1>Ya hz chto eto</h1>
+        <user-card :key="friend.id" :account="friend" v-for="friend in bannedFriends"> </user-card>
     </div>
 </template>
 
 <script>
+  import UserCard from "../components/UserCard"
+
   export default {
-    name: "Banned"
+    name: "Banned",
+    components: {
+      UserCard
+    },
+    computed: {
+      bannedFriends() {
+        return this.$store.state.bannedFriends
+      }
+    }
   }
 </script>
 

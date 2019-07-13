@@ -1,6 +1,6 @@
 <template>
     <div>
-        <user-card :key="friend.id" :account="friend" v-for="friend in bannedFriend"> </user-card>
+        <user-card :key="friend.id" :account="friend" v-for="friend in deletedFriends"> </user-card>
     </div>
 </template>
 
@@ -13,7 +13,7 @@
         UserCard
       },
       computed: {
-        bannedFriend() {
+        deletedFriends() {
           return this.$store.state.bannedFriends
         }
       }
