@@ -33,6 +33,7 @@
     },
     methods: {
       async setAccount() {
+        this.$store.commit('resetAccount')
         return await this.$store.dispatch('setAccount', this.account_link)
       },
       clearError() {
