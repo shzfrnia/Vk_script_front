@@ -1,23 +1,23 @@
 <template>
     <div>
-        <user-card :full-name="'Mikhail Uljakov'" v-for="i in list"> </user-card>
+        <user-card :key="friend.id" :account="friend" v-for="friend in bannedFriend"> </user-card>
     </div>
 </template>
 
 <script>
     import UserCard from "../components/UserCard"
 
-  export default {
+    export default {
       name: "Deleted",
       components: {
-          UserCard
+        UserCard
       },
-      data() {
-          return {
-              list: [1,2,3,4,5,6,7,8]
-          }
+      computed: {
+        bannedFriend() {
+          return this.$store.state.bannedFriends
+        }
       }
-  }
+    }
 </script>
 
 <style scoped>
