@@ -17,7 +17,7 @@
       },
       computed: {
         deletedFriends() {
-          return this.$store.state.bannedFriends
+          return this.$store.state.deletedFriends
         }
       },
       methods: {
