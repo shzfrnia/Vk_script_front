@@ -12,7 +12,7 @@ export class UserAPI {
     }
 
     static async getFriends(user_ids) {
-      if(UserAPI.foo()) {
+      if (UserAPI.foo()) {
         const friends = FakeFriends
         return friends
       } else {
