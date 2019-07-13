@@ -1,43 +1,23 @@
 <template>
     <div id="nav">
         <div class="my-btn-container">
-            <div class="my-btn" :key="route.icon" v-for="(route, index) in routes">
-                <router-link @click="selectRoute(index)" :style="{color: route.bkColor}" :to="route.route">
-                    <i :class="['fas', `fa-${route.icon}`]"></i>
-                </router-link>
-            </div>
+            <account-manager :user-name="'Hello world'"></account-manager>
+            <router-link :to="{name: 'banned'}">
+                <div class="my-btn">
+                    <i style="color: red;" class="fas fa-map-marker"></i>
+                </div>
+            </router-link>
         </div>
     </div>
 </template>
 
 <script>
+    import AccountManager from '../components/AccountManager'
+
   export default {
     name: "NavBar",
-    data() {
-      return {
-        routes: [
-          {
-            icon: 'comment',
-            route: '/one',
-            bkColor: '#3EAF6F'
-          },
-          {
-            icon: 'user',
-            route: '/second',
-            bkColor : '#BE0031'
-          },
-          {
-            icon: 'map-marker',
-            route: '/third',
-            bkColor: '#8E00AC'
-          },
-          {
-            icon: 'cog',
-            route: '/fourth',
-            bkColor: '#DE9B00'
-          }
-        ]
-      }
+    components: {
+      AccountManager
     }
   }
 </script>
@@ -64,5 +44,9 @@
         text-align: center;
         line-height: 50px;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        transition: 0.5s;
+    }
+    .router-link-active .my-btn{
+        width: 80px;
     }
 </style>

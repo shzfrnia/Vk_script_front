@@ -1,24 +1,22 @@
 <template>
-    <component :is="layout">
-        <h1>This is Russia</h1>
-    </component>
+    <div>
+        <user-card :full-name="'Mikhail Uljakov'" v-for="i in list"> </user-card>
+    </div>
 </template>
 
 <script>
-  import PageContent from "../components/PageContent"
-  import NavBar from "../components/NavBar"
+    import UserCard from "../components/UserCard"
 
   export default {
-    name: "SecondPage",
-    components: {
-      PageContent,
-      NavBar
-    },
-    data() {
-      return {
-        layout: 'default-layout'
+      name: "SecondPage",
+      components: {
+          UserCard
+      },
+      data() {
+          return {
+              list: [1,2,3,4,5,6,7,8]
+          }
       }
-    }
   }
 </script>
 
