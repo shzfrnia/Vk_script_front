@@ -25,14 +25,6 @@ export default new Router({
       }
     },
     {
-      path: '/one',
-      name: 'One',
-      component: () => import('./views/SetAccount.vue'),
-      meta: {
-        bkColor: "#3EAF6F"
-      }
-    },
-    {
       path: '/second',
       name: 'Second',
       component: () => import('./views/SecondPage.vue'),
