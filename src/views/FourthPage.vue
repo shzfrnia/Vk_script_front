@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>FUCK YOU</h1>
+        <h1>kek</h1>
     </div>
 </template>
 

@@ -40,8 +40,7 @@
     .component-fade-enter-active, .component-fade-leave-active {
         transition: opacity .15s ease;
     }
-    .component-fade-enter, .component-fade-leave-to
-        /* .component-fade-leave-active до версии 2.1.8 */ {
+    .component-fade-enter, .component-fade-leave-to {
         opacity: 0;
     }
 </style>

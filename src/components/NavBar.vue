@@ -1,9 +1,10 @@
 <template>
     <div id="nav">
         <div class="my-btn-container">
-            <router-link :key="route.icon" :to="route.route" v-for="route in routes">
-                <div class="my-btn" :key="route.icon">
-                    <i :style="{color: route.bkColor}" :class="['fas', `fa-${route.icon}`]"></i>
+            <account-manager :user-name="'Hello world'"></account-manager>
+            <router-link :to="{name: 'banned'}">
+                <div class="my-btn">
+                    <i style="color: red;" class="fas fa-map-marker"></i>
                 </div>
             </router-link>
         </div>
@@ -11,33 +12,12 @@
 </template>
 
 <script>
+    import AccountManager from '../components/AccountManager'
+
   export default {
     name: "NavBar",
-    data() {
-      return {
-        routes: [
-          {
-            icon: 'user-circle',
-            route: '/one',
-            bkColor: '#3EAF6F'
-          },
-          {
-            icon: 'user',
-            route: '/second',
-            bkColor : '#BE0031'
-          },
-          {
-            icon: 'map-marker',
-            route: '/third',
-            bkColor: '#8E00AC'
-          },
-          {
-            icon: 'cog',
-            route: '/fourth',
-            bkColor: '#DE9B00'
-          }
-        ]
-      }
+    components: {
+      AccountManager
     }
   }
 </script>
