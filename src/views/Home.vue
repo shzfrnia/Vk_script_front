@@ -22,7 +22,7 @@
     data() {
       return {
         account_link: '',
-        has_error: this.$store.state.errors.setAccount !== ''
+        fetchInterval: null
       }
     },
     computed: {
