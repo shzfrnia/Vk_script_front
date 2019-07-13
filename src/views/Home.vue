@@ -4,7 +4,7 @@
             <div class="col-8">
                 <md-field>
                     <label>Ссылка на профиль</label>
-                    <md-input @input="clearError()" v-model="account_link"></md-input>
+                    <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
                 </md-field>
                 <md-button @click="setAccount()" class="md-raised md-primary">Сканировать аккаунт</md-button>
                 <p v-if="hasError" style="font-size: 40px; color:red;">{{errorMsg}}</p>
