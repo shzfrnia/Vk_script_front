@@ -1,6 +1,6 @@
 <template>
-    <div class="media">
-        <img height="50" width="50" class="mr-3 image-around" alt="...">
+    <div class="user-card-wrapper">
+        <avatar :url="account.avatar"></avatar>
         <div class="media-body">
             <h5 class="mt-0 text-left">{{account.first_name}} {{account.last_name}}</h5>
         </div>
@@ -8,18 +8,22 @@
 </template>
 
 <script>
+    import Avatar from '../components/Avatar'
+
     export default {
-        name: "UserCard",
-        props: {
-            account: Object
-        }
+      name: "UserCard",
+      components: {
+        Avatar
+      },
+      props: {
+        account: Object
+      }
     }
 </script>
 
 <style scoped>
-    .image-around {
-        -webkit-border-radius: 100px;
-        -moz-border-radius: 100px;
-        border-radius: 100px;
+    .user-card-wrapper {
+        width: 100%;
+        height: 100px;
     }
 </style>

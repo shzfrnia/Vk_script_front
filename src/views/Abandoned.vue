@@ -1,6 +1,6 @@
 <template>
     <div>
-        <user-card :key="friend.id" :account="friend" v-for="friend in abandonedFriends"> </user-card>
+        <user-card :key="friend.id" :account="friend" v-for="friend in abandonedFriends"></user-card>
     </div>
 </template>
 
