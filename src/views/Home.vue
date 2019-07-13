@@ -44,7 +44,16 @@
     },
     beforeRouteLeave(to, from, next) {
       this.clearError()
+      window.clearInterval(this.fetchInterval)
       next()
+    },
+    async created() {
+      if (this.$store.getters.accountIsSet) {
+        const userIds = this.$store.state.session.userIds
+        await this.$store.dispatch('fetchBannedFriends', userIds)
+        this.fetchInterval = window.setInterval(
+            () => this.$store.dispatch('fetchBannedFriends', userIds), 5000)
+      }
     }
   }
 </script>
