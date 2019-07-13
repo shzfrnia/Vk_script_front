@@ -25,6 +25,15 @@ export default new Vuex.Store({
     setAccount(state, user_ids) {
       state.session.userIds = user_ids
     },
+    setError(state, {form, errors}) {
+      state.errors[form] = errors
+    },
+    clearErrors(state) {
+      for (const form in state.errors) {
+        state.errors[form] = ""
+      }
+    }
+  },
   getters: {
     accountIsSet(state) {
       return !!state.session.userIds || state.session.userIds !== ''
