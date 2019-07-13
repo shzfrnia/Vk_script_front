@@ -8,7 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     session: {
-      userIds: localStorage.getItem('userIds') || ''
+      userIds: localStorage.getItem('userIds') || '',
+      userName: localStorage.getItem('userName') || '',
+      account: {}
     },
     friendList: [],
     friendStates: {
@@ -22,8 +24,20 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setAccount(state, user_ids) {
-      state.session.userIds = user_ids
+    setAccount(state, account) {
+      const fullName = `${account.first_name} ${account.last_name}`
+      const id = account.id
+      state.session.userIds = id
+      state.session.userName = fullName
+      state.session.account = account
+      localStorage.setItem('userIds', id)
+      localStorage.setItem('userName', fullName)
+    },
+    resetAccount(state) {
+      state.session.userIds = ''
+      state.session.userName = ''
+      localStorage.removeItem('userIds')
+      localStorage.removeItem('userName')
     },
     setError(state, {form, errors}) {
       state.errors[form] = errors
@@ -37,16 +51,19 @@ export default new Vuex.Store({
   getters: {
     accountIsSet(state) {
       return !!state.session.userIds || state.session.userIds !== ''
+    },
+    accountName(state) {
+      return state.session.userName || ''
     }
   },
   actions: {
     async setAccount({commit}, user_ids) {
       try {
         const account = await UserAPI.getUser(user_ids)
-        commit('setAccount', account.id)
+        commit('setAccount', account)
       } catch (e) {
+        commit('resetAccount')
         commit('setError', {form:'setAccount', errors: e.error})
-        commit('setAccount','')
       }
     }
   }
