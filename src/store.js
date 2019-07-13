@@ -14,12 +14,7 @@ export default new Vuex.Store({
       account: {}
     },
     friendList: [],
-    friendStates: {
-      banned: "banned",
-      active: null,
-      deleted: "deleted",
-      offline: true
-    },
+    bannedFriends: [],
     errors: {
       setAccount: ""
     }
@@ -52,6 +47,9 @@ export default new Vuex.Store({
       for (const form in state.errors) {
         state.errors[form] = ""
       }
+    },
+    setBannedFriends(state, friends) {
+      state.bannedFriends = friends
     }
   },
   getters: {
@@ -70,6 +68,14 @@ export default new Vuex.Store({
       } catch (e) {
         commit('resetAccount')
         commit('setError', {form:'setAccount', errors: e.error})
+      }
+    },
+    async fetchBannedFriends({commit}, user_ids) {
+      try {
+        const bannedFriends = await UserAPI.getFriends(user_ids)
+        commit('setBannedFriends', bannedFriends)
+      } catch (e) {
+        commit('setError',{form:'bannedFriends', errors: e.error})
       }
     }
   }
