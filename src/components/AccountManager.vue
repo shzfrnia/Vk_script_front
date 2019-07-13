@@ -1,64 +1,61 @@
 <template>
-    <router-link :to="{name: 'Fourth'}">
-        <div class="my-btn" :style="{'width': widthButton}">
-            <i :class="['fas', `fa-user`]" class="inline">
-                <transition name='component-fade'>
-                     <p v-show="nameIsShow">{{message}}</p>
-                    
-                </transition>
-            </i>
+    <router-link :to="{name: 'home'}">
+        <div style="overflow: hidden;" class="my-btn" :style="{'width': widthButton}">
+            <i class="fas fa-user"></i>
+            <transition name='fade'>
+                <p class="inline" v-show="nameIsShow">{{userName}}</p>
+            </transition>
         </div>
     </router-link>
 </template>
 
 <script>
     export default {
-        name: "AccountManager",
+      name: "AccountManager",
         props: {
-            message: {
-                type: String,
-                required: true
-            }
+          userName: {
+            type: String,
+            required: true
+          }
         },
         computed: {
-            routeIsActive() {
-                // console.log(this.$route)
-                return this.$route.path === '/fourth'
-            },
-            nameIsShow() {
-                return this.routeIsActive
-            },
-            widthButton() {
-                if (this.routeIsActive) {
-                    const width = (this.message.length * 20) + 'px'
-                    console.log(width)
-                    return width
-                } else {
-                    return 50 + "px"
-                }
-            }
-        }
+          routeIsActive() {
+            return this.$route.path === '/'
+          },
+          nameIsShow() {
+            return this.routeIsActive && this.$store.getters.accountIsSet
+          },
+          widthButton() {
+            if (!this.routeIsActive) // when route is not active
+              return 50 + 'px'
+
+            if (this.routeIsActive && this.nameIsShow) // when route is active and has account
+              return (this.userName.length * 20) + 'px'
+
+            if (this.routeIsActive) // when route just active
+              return 80 + 'px'
+
+            return 50 + 'px'
+          }
+        },
     }
 </script>
 
 <style scoped>
-    .component-fade-enter-active, .component-fade-leave-active {
-        transition: opacity .3s ease;
+    .fade-enter-active {
+        transition: opacity 1.3s;
     }
-    .component-fade-enter, .component-fade-leave-to
-        /* .component-fade-leave-active до версии 2.1.8 */ {
+
+    .fade-leave-active {
+        transition: opacity .1s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
         opacity: 0;
     }
 
-
-
-
     .inline {
-        display: inline-flex;
-    }
-
-    .inline p {
         margin-left: 10px;
+        display: inline;
     }
 
     .my-btn {
