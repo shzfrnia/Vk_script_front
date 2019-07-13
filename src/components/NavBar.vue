@@ -2,9 +2,19 @@
     <div id="nav">
         <div class="my-btn-container">
             <account-manager></account-manager>
-            <router-link :to="{name: 'banned'}">
+            <router-link :class="{disabled: !$store.getters.accountIsSet}" :to="{name: 'banned'}">
                 <div class="my-btn">
-                    <i style="color: red;" class="fas fa-map-marker"></i>
+                    <i :style="[{'color' : $store.getters.accountIsSet ? '#8E00AC': 'gray'}]" class="fas fa-user-slash"></i>
+                </div>
+            </router-link>
+            <router-link :class="{disabled: !$store.getters.accountIsSet}" :to="{name: 'deleted'}">
+                <div class="my-btn">
+                    <i :style="[{'color' : $store.getters.accountIsSet ? '#BE0031': 'gray'}]" class="fas fa-user-times"></i>
+                </div>
+            </router-link>
+            <router-link :class="{disabled: !$store.getters.accountIsSet}" :to="{name: 'abandoned'}">
+                <div class="my-btn">
+                    <i :style="[{'color' : $store.getters.accountIsSet ? '#DE9B00': 'gray'}]" class="fas fa-user-clock"></i>
                 </div>
             </router-link>
         </div>
@@ -23,6 +33,10 @@
 </script>
 
 <style scoped>
+    .disabled {
+        pointer-events: none;
+    }
+
     .my-btn-container {
         display: flex;
         /*background-color: black;*/

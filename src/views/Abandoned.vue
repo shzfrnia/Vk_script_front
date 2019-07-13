@@ -7,7 +7,7 @@
 <script>
 
   export default {
-    name: "FourthPage",
+    name: "Abandoned",
   }
 </script>
 

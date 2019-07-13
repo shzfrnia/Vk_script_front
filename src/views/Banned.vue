@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: "ThirdPage"
+    name: "Banned"
   }
 </script>
 

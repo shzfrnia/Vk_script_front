@@ -8,7 +8,7 @@
     import UserCard from "../components/UserCard"
 
   export default {
-      name: "SecondPage",
+      name: "Deleted",
       components: {
           UserCard
       },
