@@ -15,6 +15,8 @@ export default new Vuex.Store({
     },
     friendList: [],
     bannedFriends: [],
+    deletedFriends: [],
+    abandonedFriends: [],
     errors: {
       setAccount: ""
     }
@@ -50,6 +52,12 @@ export default new Vuex.Store({
     },
     setBannedFriends(state, friends) {
       state.bannedFriends = friends
+    },
+    setDeletedFriends(state, friends) {
+      state.deletedFriends = friends
+    },
+    setAbandonedFriends(state, friends) {
+      state.abandonedFriends = friends
     }
   },
   getters: {
@@ -70,12 +78,33 @@ export default new Vuex.Store({
         commit('setError', {form:'setAccount', errors: e.error})
       }
     },
+    async fetchAllFriends({dispatch}, user_ids) {
+      dispatch('fetchBannedFriends', user_ids)
+      dispatch('fetchDeletedFriends', user_ids)
+      dispatch('fetchAbandonedFriends', user_ids)
+    },
     async fetchBannedFriends({commit}, user_ids) {
       try {
-        const bannedFriends = await UserAPI.getFriends(user_ids)
+        const bannedFriends = await UserAPI.getBannedFriends(user_ids)
         commit('setBannedFriends', bannedFriends)
       } catch (e) {
         commit('setError',{form:'bannedFriends', errors: e.error})
+      }
+    },
+    async fetchDeletedFriends({commit}, user_ids) {
+      try {
+        const deletedFriends = await UserAPI.getDeletedFriends(user_ids)
+        commit('setDeletedFriends', deletedFriends)
+      } catch (e) {
+        commit('setError',{form:'deletedFriends', errors: e.error})
+      }
+    },
+    async fetchAbandonedFriends({commit}, user_ids) {
+      try {
+        const abandonedFriends = await UserAPI.getAbandonedFriends(user_ids)
+        commit('setAbandonedFriends', abandonedFriends)
+      } catch (e) {
+        commit('setError',{form:'abandonedFriends', errors: e.error})
       }
     }
   }
