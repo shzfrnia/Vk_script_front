@@ -77,4 +77,8 @@
         transition: 0.5s;
         overflow: hidden;
     }
+
+    .router-link-exact-active .my-btn{
+        width: 80px;
+    }
 </style>
