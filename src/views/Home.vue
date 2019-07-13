@@ -36,7 +36,10 @@
     methods: {
       async setAccount() {
         this.$store.commit('resetAccount')
-        return await this.$store.dispatch('setAccount', this.account_link)
+        await this.$store.dispatch('setAccount', this.account_link)
+        if (this.$store.getters.accountIsSet) {
+          await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
+        }
       },
       clearError() {
         this.$store.commit('clearErrors')
