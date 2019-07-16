@@ -9,14 +9,10 @@
             <div style="display: flex" class="md-layout-item md-size-100">
                 <md-button style="margin:0 auto" @click="setAccount()" class="md-raised md-primary">Сканировать аккаунт</md-button>
             </div>
-
-            <div class="">
             <transition name="fade">
                             <p v-if="hasError"
-                               style="font-size: 40px; color:red;">{{errorMsg}}</p>
-                </transition>
-            </div>
-
+                               style="font-size: 30px; color:red;">{{errorMsg}}</p>
+            </transition>
         </div>
         <div class="md-layout-item md-size-20"></div>
     </div>
