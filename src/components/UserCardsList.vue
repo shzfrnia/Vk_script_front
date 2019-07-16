@@ -1,12 +1,13 @@
 <template>
     <div>
         <md-empty-state
+                v-if="userCardList.length === 0"
                 class="md-primary"
                 :md-label="category + ' друзья отсуствуют'"
                 md-icon="done"
                 md-description="Ну или они просто скрыты. кек ¯\_(ツ)_/¯">
         </md-empty-state>
-        <div>
+        <div v-else>
             <user-card @click.native="clickOnUser(index)"
                        :key="index"
                        :account="friend"
