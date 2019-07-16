@@ -1,32 +1,26 @@
 <template>
-    <div style="width: 100%">
-        <user-card @click.native="clickOnUser(index)"
-                   :key="friend.id"
-                   :account="friend"
-                   v-for="friend in deletedFriends"></user-card>
+    <div class="md-layout md-gutter md-alignment-center-center">
+        <div class="md-layout-item md-size-20"></div>
+        <div class="md-layout-item">
+            <user-cards-list
+                    category="Удаленные"
+                    :user-card-list="deletedFriends"></user-cards-list>
+        </div>
+        <div class="md-layout-item md-size-20"></div>
     </div>
 </template>
 
 <script>
-    import UserCard from "../components/UserCard"
+    import UserCardsList from '../components/UserCardsList'
 
     export default {
       name: "Deleted",
       components: {
-        UserCard
+        UserCardsList
       },
       computed: {
         deletedFriends() {
           return this.$store.state.deletedFriends
-        }
-      },
-      methods: {
-        clickOnUser(index) {
-          this.openInNewTab(this.$store.state.abandonedFriends[index].link)
-        },
-        openInNewTab(url) {
-          const win = window.open(url, '_blank');
-          win.focus();
         }
       }
     }
