@@ -1,17 +1,24 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-8">
-                <md-field>
-                    <label>Ссылка на профиль</label>
-                    <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
-                </md-field>
-                <md-button @click="setAccount()" class="md-raised md-primary">Сканировать аккаунт</md-button>
-                <transition name="fade">
-                    <p v-if="hasError" style="font-size: 40px; color:red;">{{errorMsg}}</p>
+    <div style="margin-top: 30vh" class="md-layout md-gutter md-alignment-center-center">
+        <div class="md-layout-item md-size-20"></div>
+        <div class="md-layout md-alignment-center-center">
+            <md-field>
+                <label>Ссылка на профиль</label>
+                <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
+            </md-field>
+            <div style="display: flex" class="md-layout-item md-size-100">
+                <md-button style="margin:0 auto" @click="setAccount()" class="md-raised md-primary">Сканировать аккаунт</md-button>
+            </div>
+
+            <div class="">
+            <transition name="fade">
+                            <p v-if="hasError"
+                               style="font-size: 40px; color:red;">{{errorMsg}}</p>
                 </transition>
             </div>
+
         </div>
+        <div class="md-layout-item md-size-20"></div>
     </div>
 </template>
 
@@ -30,12 +37,18 @@
       },
       errorMsg() {
         return this.hasError ? this.$store.state.errors.setAccount : ""
+      },
+      getIdsFromAccountLink() {
+        const UrlIndex = this.account_link.search(/vk.com/)
+        if (UrlIndex === -1 ) return this.account_link  //ids not found try return user's input bec he can input id without link
+        const ids = this.account_link.slice(UrlIndex + 'vk.com'.length + 1)
+        return ids
       }
     },
     methods: {
       async setAccount() {
         this.$store.commit('resetAccount')
-        await this.$store.dispatch('setAccount', this.account_link)
+        await this.$store.dispatch('setAccount', this.getIdsFromAccountLink)
         if (this.$store.getters.accountIsSet) {
           await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
         }
@@ -75,14 +88,11 @@
 
     .md-field label {
         right: 0;
+        text-align: center;
     }
 
     .md-button {
         outline: none;
     }
 
-    .container {
-        height: 260px;
-        align-self: center;
-    }
 </style>
