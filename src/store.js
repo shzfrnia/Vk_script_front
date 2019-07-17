@@ -18,6 +18,7 @@ export default new Vuex.Store({
     deletedFriends: [],
     abandonedFriends: [],
     loading: true,
+    fetched: false,
     errors: {
       setAccount: ""
     }
@@ -62,6 +63,9 @@ export default new Vuex.Store({
     },
     setLoading(state, boolean) {
       state.loading = boolean
+    },
+    setFetchSate(state, boolean) {
+      state.fetched = boolean
     }
   },
   getters: {
@@ -88,6 +92,7 @@ export default new Vuex.Store({
       await dispatch('fetchDeletedFriends', user_ids)
       await dispatch('fetchAbandonedFriends', user_ids)
       commit('setLoading', false)
+      commit('setFetchSate', true)
     },
     async fetchBannedFriends({commit}, user_ids) {
       try {
