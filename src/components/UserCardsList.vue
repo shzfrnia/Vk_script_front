@@ -1,30 +1,33 @@
 <template>
     <div>
-        <md-empty-state
-                v-if="userCardList.length === 0"
-                class="md-primary"
-                :md-label="category + ' друзья отсуствуют'"
-                md-icon="done"
-                md-description="Ну или они просто скрыты. кек ¯\_(ツ)_/¯">
-        </md-empty-state>
-        <div v-else>
+        <Loader v-if="$store.state.loading">
+        </Loader>
+        <div v-else-if="userCardList.length !== 0">
             <user-card @click.native="clickOnUser(index)"
                        :key="index"
                        :account="friend"
                        :show-meta="showMeta"
                        v-for="(friend,index) in userCardList"></user-card>
         </div>
-
+        <md-empty-state
+                v-else
+                class="md-primary"
+                :md-label="category + ' друзья отсуствуют'"
+                md-icon="done"
+                md-description="Ну или они просто скрыты. кек ¯\_(ツ)_/¯">
+        </md-empty-state>
     </div>
 </template>
 
 <script>
   import UserCard from './UserCard'
+  import Loader from './Loader'
 
   export default {
     name: "UserCardsList",
     components: {
-      UserCard
+      UserCard,
+      Loader
     },
     props: {
       userCardList: {

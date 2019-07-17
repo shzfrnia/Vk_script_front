@@ -16,7 +16,7 @@ export class UserAPI {
       const result = await axios.get(API_ROUTES.user,{params: {user_ids: user_ids}})
       return result.data
     } catch (e) {
-      throw {error: "User was not found"}
+      throw {error: "Аккаунт не найден"}
     }
   }
 
