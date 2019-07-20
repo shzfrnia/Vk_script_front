@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <md-content style="max-height: 89vh; overflow: auto" class="md-scrollbar">
         <Loader v-if="$store.state.loading">
         </Loader>
         <div v-else-if="userCardList.length !== 0">
@@ -16,7 +16,7 @@
                 md-icon="done"
                 md-description="Ну или они просто скрыты. кек ¯\_(ツ)_/¯">
         </md-empty-state>
-    </div>
+    </md-content>
 </template>
 
 <script>

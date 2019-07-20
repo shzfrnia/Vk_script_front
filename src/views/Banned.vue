@@ -12,9 +12,13 @@
 
 <script>
   import UserCardsList from '../components/UserCardsList'
+  import AutoFetchFriendsMixin from '../mixins/AutoFetchFriendsMixin'
 
   export default {
     name: "Banned",
+    mixins: [
+      AutoFetchFriendsMixin
+    ],
     components: {
       UserCardsList
     },

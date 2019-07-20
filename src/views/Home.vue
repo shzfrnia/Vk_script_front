@@ -19,9 +19,13 @@
 </template>
 
 <script>
+  import AutoFetchFriendsMixin from '../mixins/AutoFetchFriendsMixin'
 
   export default {
     name: "home",
+    mixins: [
+        AutoFetchFriendsMixin
+    ],
     data() {
       return {
         account_link: ''
@@ -56,11 +60,6 @@
     beforeRouteLeave(to, from, next) {
       this.clearError()
       next()
-    },
-    async created() {
-      if (this.$store.getters.accountIsSet) {
-        await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
-      }
     }
   }
 </script>

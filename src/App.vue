@@ -32,7 +32,8 @@
         -moz-osx-font-smoothing: grayscale;
         transition: 0.4s;
         height: 100vh;
-        overflow: auto;
+        overflow: hidden;
+
     }
 
     .component-fade-enter-active, .component-fade-leave-active {

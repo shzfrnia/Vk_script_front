@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_ENDPINT = 'http://localhost:5000/api'
+const API_ENDPINT = '/api'
 
 const API_ROUTES = {
   'user': `${API_ENDPINT}/user`,
