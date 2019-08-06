@@ -1,5 +1,5 @@
 <template>
-    <md-content style="max-height: 89vh; overflow: auto" class="md-scrollbar">
+    <md-content style="height: 89vh; overflow: auto" class="md-scrollbar">
         <Loader v-if="$store.state.loading">
         </Loader>
         <div v-else-if="userCardList.length !== 0">

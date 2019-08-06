@@ -11,7 +11,7 @@
             </div>
             <transition name="fade">
                             <p v-if="hasError"
-                               style="font-size: 30px; color:red;">{{errorMsg}}</p>
+                               class="error-text">{{errorMsg}}</p>
             </transition>
         </div>
         <div class="md-layout-item md-size-20"></div>
@@ -72,7 +72,6 @@
         opacity: 0;
     }
 
-
     .md-field:after {
         height: 2px;
         background: black;
@@ -88,6 +87,11 @@
 
     .md-button {
         outline: none;
+    }
+
+    .error-text {
+        font-size: 30px;
+        color:red;
     }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <div style="display: flex; justify-content: center; margin-top: 10vw">
-        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="container">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
 </template>
 
@@ -11,6 +11,11 @@
 </script>
 
 <style scoped>
+    .container {
+        margin-top: 10vw;
+        text-align: center;
+    }
+
     .lds-roller {
         display: inline-block;
         position: relative;
