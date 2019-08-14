@@ -1,5 +1,5 @@
 <template>
-    <md-content style="max-height: 89vh; overflow: auto" class="md-scrollbar">
+    <md-content class="md-scrollbar">
         <Loader v-if="$store.state.loading">
         </Loader>
         <div v-else-if="userCardList.length !== 0">
@@ -7,7 +7,7 @@
                        :key="index"
                        :account="friend"
                        :show-meta="showMeta"
-                       v-for="(friend,index) in userCardList"></user-card>
+                       v-for="(friend,index) in userCardList"/>
         </div>
         <md-empty-state
                 v-else
@@ -56,5 +56,8 @@
 </script>
 
 <style scoped>
-
+    .md-content {
+        height: 100%;
+        overflow: auto;
+    }
 </style>
