@@ -1,7 +1,7 @@
 <template>
   <div :style="{'background-color': selectedBgColor}" id="app">
       <nav-bar></nav-bar>
-      <div class="md-layout">
+      <div class="md-layout md-alignment-center-center">
           <transition name="component-fade" mode="out-in">
             <router-view/>
           </transition>
@@ -23,10 +23,21 @@
     }
 </script>
 
+<style lang="scss">
+    @import "~vue-material/dist/theme/engine"; // Import the theme engine
+
+    @include md-register-theme("default", (
+    primary: md-get-palette-color(blue, A200), // The primary color of your application
+    accent: md-get-palette-color(red, A200) // The accent or secondary color
+    ));
+
+    @import "~vue-material/dist/theme/all"; // Apply the theme
+</style>
 <style>
     @import 'assets/fonts/fontAwesome.css';
     @import 'assets/fonts/materialIcons.css';
-
+</style>
+<style scoped>
     #app {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
