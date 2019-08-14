@@ -1,13 +1,9 @@
 <template>
-    <div class="md-layout md-gutter md-alignment-center-center">
-        <div class="md-layout-item md-size-20"></div>
-        <div class="md-layout-item">
-            <user-cards-list
-                    :show-meta="true"
-                    category="Забросившие аккаунт"
-                    :user-card-list="abandonedFriends"></user-cards-list>
-        </div>
-        <div class="md-layout-item md-size-20"></div>
+    <div class="md-layout-item md-size-50 md-small-size-100">
+        <user-cards-list
+                :show-meta="true"
+                category="Забросившие аккаунт"
+                :user-card-list="abandonedFriends"></user-cards-list>
     </div>
 </template>
 
@@ -32,4 +28,9 @@
 </script>
 
 <style scoped>
+    .md-layout-item {
+        position: relative;
+        padding: 0 10px 0 10px;
+        height: 88vh;
+    }
 </style>
