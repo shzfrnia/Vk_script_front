@@ -2,21 +2,21 @@
     <div id="nav">
         <div class="my-btn-container">
             <account-manager></account-manager>
-            <md-badge :class="[{'disabled-link': !$store.getters.accountIsSet}]" class="md-square" :md-content="10">
+            <md-badge :class="[{'disabled-link': !$store.getters.accountIsSet}]" class="md-square" :md-content="bannedBadge">
                 <router-link :to="{name: 'banned'}">
                     <div class="my-btn">
                         <i style="color: #8E00AC" class="fas fa-user-slash"></i>
                     </div>
                 </router-link>
             </md-badge>
-            <md-badge :class="[{'disabled-link': !$store.getters.accountIsSet}]" class="md-square" :md-content="11">
+            <md-badge :class="[{'disabled-link': !$store.getters.accountIsSet}]" class="md-square" :md-content="deletedBadge">
                 <router-link :to="{name: 'deleted'}">
                     <div class="my-btn">
                         <i style="color: #BE0031" class="fas fa-user-times"></i>
                     </div>
                 </router-link>
             </md-badge>
-            <md-badge :class="[{'disabled-link': !$store.getters.accountIsSet}]" class="md-square" :md-content="12">
+            <md-badge :class="[{'disabled-link': !$store.getters.accountIsSet}]" class="md-square" :md-content="abandonedBadge">
                 <router-link :to="{name: 'abandoned'}">
                     <div class="my-btn">
                         <i style="color: #DE9B00" class="fas fa-user-clock"></i>
@@ -34,6 +34,17 @@
     name: "NavBar",
     components: {
       AccountManager
+    },
+    computed: {
+      bannedBadge() {
+        return this.$store.state.bannedFriends.length
+      },
+      abandonedBadge() {
+        return this.$store.state.abandonedFriends.length
+      },
+      deletedBadge() {
+        return this.$store.state.deletedFriends.length
+      }
     }
   }
 </script>
@@ -49,7 +60,7 @@
 
     .my-btn-container {
         display: flex;
-        min-height: 70px;
+        min-height: 80px;
         align-items: center;
         justify-content: center;
     }
