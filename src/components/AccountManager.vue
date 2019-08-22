@@ -1,13 +1,18 @@
 <template>
-    <router-link id="link" :to="{name: 'home'}">
-        <div style="overflow: hidden;" class="my-btn" :style="{'width': widthButton}">
-            <avatar v-if="$store.getters.accountIsSet" :url="$store.state.session.avatar"></avatar>
-            <i v-else class="fas fa-user"></i>
-            <transition name='fade'>
-                <p id="nickname" v-show="nameIsShow">{{userName}}</p>
-            </transition>
-        </div>
-    </router-link>
+    <div>
+<!--        :class="[{'disabled-link': !$store.getters.accountIsSet}]"-->
+        <md-badge class="md-square disabled-link" :md-content="888">
+            <router-link class="link" :to="{name: 'home'}">
+                <div class="my-btn" :style="{'width': widthButton}">
+                    <avatar v-if="$store.getters.accountIsSet" :url="$store.state.session.avatar"></avatar>
+                    <i v-else class="fas fa-user"></i>
+                    <transition name='fade'>
+                        <p class="nickname" v-show="nameIsShow">{{userName}}</p>
+                    </transition>
+                </div>
+            </router-link>
+        </md-badge>
+    </div>
 </template>
 
 <script>
@@ -44,6 +49,17 @@
     }
 </script>
 
+<style>
+    .md-badge {
+        font-size: 11px !important;
+        font-weight: bold;
+    }
+
+
+    .md-badge,.disabled-link .md-badge{
+        display: none;
+    }
+</style>
 <style scoped>
     .fade-enter-active {
         transition: opacity 2.7s;
@@ -92,12 +108,11 @@
     }
 
     @media screen and (max-width: 530px) {
-        #nickname {
+        .nickname {
             display: none;
         }
-        #link .my-btn {
+        .link .my-btn {
             width: 50px !important;
         }
     }
-
 </style>
