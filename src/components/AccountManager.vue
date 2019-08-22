@@ -1,7 +1,7 @@
 <template>
     <div>
 <!--        :class="[{'disabled-link': !$store.getters.accountIsSet}]"-->
-        <md-badge class="md-square disabled-link" :md-content="888">
+        <md-badge class="md-square disabled-link" :md-content="0">
             <router-link class="link" :to="{name: 'home'}">
                 <div class="my-btn" :style="{'width': widthButton}">
                     <avatar v-if="$store.getters.accountIsSet" :url="$store.state.session.avatar"></avatar>
@@ -49,17 +49,6 @@
     }
 </script>
 
-<style>
-    .md-badge {
-        font-size: 11px !important;
-        font-weight: bold;
-    }
-
-
-    .md-badge,.disabled-link .md-badge{
-        display: none;
-    }
-</style>
 <style scoped>
     .fade-enter-active {
         transition: opacity 2.7s;
