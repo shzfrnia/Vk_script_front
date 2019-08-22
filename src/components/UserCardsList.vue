@@ -1,14 +1,14 @@
 <template>
-    <md-content class="md-scrollbar">
+    <div class="container">
         <Loader v-if="$store.state.loading">
         </Loader>
-        <div v-else-if="userCardList.length !== 0">
-            <user-card @click.native="clickOnUser(index)"
-                       :key="index"
-                       :account="friend"
-                       :show-meta="showMeta"
-                       v-for="(friend,index) in userCardList"/>
-        </div>
+        <md-content v-else-if="userCardList.length !== 0" class="md-scrollbar">
+                <user-card @click.native="clickOnUser(index)"
+                           :key="index"
+                           :account="friend"
+                           :show-meta="showMeta"
+                           v-for="(friend,index) in userCardList"/>
+        </md-content>
         <md-empty-state
                 v-else
                 class="md-primary"
@@ -16,7 +16,7 @@
                 md-icon="done"
                 md-description="Ну или они просто скрыты. кек ¯\_(ツ)_/¯">
         </md-empty-state>
-    </md-content>
+    </div>
 </template>
 
 <script>
@@ -60,4 +60,9 @@
         height: 100%;
         overflow: auto;
     }
+    .container {
+        height: 100%;
+        overflow: auto;
+    }
+
 </style>

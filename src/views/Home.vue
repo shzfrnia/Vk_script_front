@@ -7,7 +7,7 @@
                 <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
             </md-field>
             <div style="display: flex" class="md-layout-item md-size-100">
-                <md-button style="margin:0 auto" @click="setAccount()" class="md-raised md-primary">Сканировать аккаунт</md-button>
+                <md-button style="margin:0 auto" @click="setAccount()" class="md-raised ">Сканировать аккаунт</md-button>
             </div>
             <transition name="fade">
                             <p v-if="hasError"
@@ -76,6 +76,7 @@
         height: 2px;
         background: black;
     }
+
     .md-input {
         text-align: center;
     }
@@ -83,15 +84,23 @@
     .md-field label {
         right: 0;
         text-align: center;
+        color: black;
     }
 
     .md-button {
         outline: none;
+        background: none !important;
     }
 
     .error-text {
         font-size: 30px;
         color:red;
     }
+    .md-focused * {
+      color: black !important;
+    }
 
+    .md-field.md-theme-default:before {
+      background: none;
+    }
 </style>
