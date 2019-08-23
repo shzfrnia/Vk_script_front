@@ -37,10 +37,10 @@
     },
     computed: {
       hasError() {
-        return this.$store.state.errors.setAccount !== ''
+        return this.errorMsg !== ''
       },
       errorMsg() {
-        return this.hasError ? this.$store.state.errors.setAccount : ""
+        return this.$store.state.errors.setAccount
       },
       getIdsFromAccountLink() {
         const UrlIndex = this.account_link.search(/vk.com/)
@@ -93,6 +93,7 @@
         font-size: 30px;
         color:red;
     }
+
     .md-focused * {
       color: black !important;
     }
