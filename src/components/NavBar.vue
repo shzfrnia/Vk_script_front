@@ -2,21 +2,21 @@
     <div id="nav">
         <div class="my-btn-container">
             <account-manager></account-manager>
-                <router-link :to="{name: 'banned'}">
+                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]" :to="{name: 'banned'}">
                     <my-badge :value="bannedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
                         <div class="my-btn">
                             <i style="color: #8E00AC" class="fas fa-user-slash"></i>
                         </div>
                     </my-badge>
                 </router-link>
-                <router-link :to="{name: 'deleted'}">
+                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]" :to="{name: 'deleted'}">
                     <my-badge :value="deletedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
                         <div class="my-btn">
                             <i style="color: #BE0031" class="fas fa-user-times"></i>
                         </div>
                     </my-badge>
                 </router-link>
-                <router-link :to="{name: 'abandoned'}">
+                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]" :to="{name: 'abandoned'}">
                     <my-badge :value="abandonedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
                         <div class="my-btn">
                             <i style="color: #DE9B00" class="fas fa-user-clock"></i>

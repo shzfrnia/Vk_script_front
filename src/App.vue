@@ -44,13 +44,15 @@
         transition: 0.4s;
         height: 100vh;
         overflow: hidden;
-
     }
 
     .component-fade-enter-active, .component-fade-leave-active {
-        transition: opacity .15s ease;
+        transition: opacity .55s;
+        opacity: 1;
     }
+
     .component-fade-enter, .component-fade-leave-to {
+        transition: opacity .5s;
         opacity: 0;
     }
 </style>
