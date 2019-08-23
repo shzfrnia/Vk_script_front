@@ -12,7 +12,7 @@
         <md-empty-state
                 v-else
                 class="md-primary"
-                :md-label="category + ' друзья отсуствуют'"
+                :md-label="category + ' друзья отсутствуют'"
                 md-icon="done"
                 md-description="Ну или они просто скрыты. кек ¯\_(ツ)_/¯">
         </md-empty-state>
