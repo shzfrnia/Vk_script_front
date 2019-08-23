@@ -1,9 +1,14 @@
 <template>
     <div class="md-layout-item md-size-50 md-small-size-100">
+        <select v-model="sortBy">
+            <option value="less">Сотрировать по убыванию</option>
+            <option value="big">Сортировать по возрастанию</option>
+            <option value="name">Сортировать по имени</option>
+        </select>
         <user-cards-list
                 :show-meta="true"
                 category="Забросившие аккаунт"
-                :user-card-list="abandonedFriends"></user-cards-list>
+                :user-card-list="sortFriendBy"></user-cards-list>
     </div>
 </template>
 
@@ -13,6 +18,11 @@
 
   export default {
     name: "Abandoned",
+    data() {
+      return {
+        sortBy: 'less'
+      }
+    },
     mixins: [
       AutoFetchFriendsMixin
     ],
@@ -22,6 +32,36 @@
     computed: {
       abandonedFriends() {
         return this.$store.state.abandonedFriends
+      },
+      sortByLess() {
+        const arrToSort = [...this.$store.state.abandonedFriends]
+        return arrToSort.sort((one, other) => {
+            if (one.days_offline > other.days_offline) {
+              return -1
+            } else {
+              return 1
+            }
+          })
+      },
+      sortByBig() {
+        const arrToSort = [...this.$store.state.abandonedFriends]
+        return arrToSort.sort((one, other) => {
+          if (one.days_offline < other.days_offline) {
+            return -1
+          } else {
+            return 1
+          }
+        })
+      },
+      sortFriendBy() {
+        if (this.sortBy === 'less') {
+          return this.sortByLess
+        }
+       else  if (this.sortBy === 'big') {
+          return this.sortByBig
+        } else {
+         return this.$store.state.abandonedFriends
+        }
       }
     }
   }
