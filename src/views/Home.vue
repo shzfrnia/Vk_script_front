@@ -1,20 +1,20 @@
 <template>
     <div style="margin-top: 30vh" class="md-layout md-gutter md-alignment-center-center">
-        <div class="md-layout-item md-size-20"></div>
         <div class="md-layout md-alignment-center-center">
-            <md-field>
-                <label>Ссылка на профиль</label>
-                <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
-            </md-field>
-            <div style="display: flex" class="md-layout-item md-size-100">
-                <md-button style="margin:0 auto" @click="setAccount()" class="md-raised ">Сканировать аккаунт</md-button>
+            <div class="md-layout-item md-size-50">
+                <md-field>
+                    <label>Ссылка на профиль</label>
+                    <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
+                </md-field>
+                <div style="display: flex" class="md-layout-item md-size-100">
+                    <md-button style="margin:0 auto" @click="setAccount()" class="md-raised ">Сканировать аккаунт</md-button>
+                </div>
+                <transition name="fade">
+                                <p v-if="hasError"
+                                   class="error-text">{{errorMsg}}</p>
+                </transition>
             </div>
-            <transition name="fade">
-                            <p v-if="hasError"
-                               class="error-text">{{errorMsg}}</p>
-            </transition>
         </div>
-        <div class="md-layout-item md-size-20"></div>
     </div>
 </template>
 
