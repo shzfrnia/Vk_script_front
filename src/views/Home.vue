@@ -6,13 +6,14 @@
                     <label>Ссылка на профиль</label>
                     <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
                 </md-field>
-                <div style="display: flex" class="md-layout-item md-size-100">
-                    <md-button style="margin:0 auto" @click="setAccount()" class="md-raised ">Сканировать аккаунт</md-button>
+                <div class="md-layout md-size-100 md-alignment-center-center">
+                    <md-button @click="setAccount()" class="md-raised">Сканировать аккаунт</md-button>
                 </div>
-                <transition name="fade">
-                                <p v-if="hasError"
-                                   class="error-text">{{errorMsg}}</p>
-                </transition>
+                <div class="md-layout md-size-100 md-alignment-center-center">
+                    <fade-effect :show="hasError">
+                        <p class="error-text">{{errorMsg}}</p>
+                    </fade-effect>
+                </div>
             </div>
         </div>
     </div>
@@ -20,11 +21,14 @@
 
 <script>
   import AutoFetchFriendsMixin from '../mixins/AutoFetchFriendsMixin'
+  import FadeEffect from "../components/FadeEffect";
 
   export default {
     name: "home",
+    components: {FadeEffect},
     mixins: [
-        AutoFetchFriendsMixin
+        AutoFetchFriendsMixin,
+        FadeEffect
     ],
     data() {
       return {
@@ -65,13 +69,6 @@
 </script>
 
 <style scoped>
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .2s;
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-        opacity: 0;
-    }
-
     .md-field:after {
         height: 2px;
         background: black;
