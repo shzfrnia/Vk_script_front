@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <slot v-if="show"></slot>
+        <slot v-show="show"></slot>
     </transition>
 </template>
 
