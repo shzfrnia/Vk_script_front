@@ -4,7 +4,7 @@
             <div class="my-btn" :class="nameNeedShow ? 'name-expanded' : 'name-hidden'">
                 <avatar v-if="$store.getters.accountIsSet" :url="$store.state.session.avatar"/>
                 <i v-else class="fas fa-user"></i>
-                <p :style="{'width': nameWidth}" class="nickname">{{userName}}</p>
+                <p v-if="$store.getters.accountIsSet" :style="{'width': nameWidth}" class="nickname">{{userName}}</p>
             </div>
         </router-link>
     </div>
