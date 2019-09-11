@@ -2,7 +2,7 @@
     <div class="md-layout-item md-size-50 md-small-size-100">
         <user-cards-list
                 category="Удаленные"
-                :user-card-list="deletedFriends"></user-cards-list>
+                :user-card-list="deletedFriends"/>
     </div>
 </template>
 

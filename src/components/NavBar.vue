@@ -2,38 +2,40 @@
     <div id="nav">
         <div class="my-btn-container">
             <account-manager></account-manager>
-            <md-badge :class="[{'disabled-link': !$store.getters.accountIsSet}]" class="md-square" :md-content="bannedBadge">
-                <router-link :to="{name: 'banned'}">
-                    <div class="my-btn">
-                        <i style="color: #8E00AC" class="fas fa-user-slash"></i>
-                    </div>
+                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]" :to="{name: 'banned', query: { link: this.$route.query.link }}">
+                    <my-badge :value="bannedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
+                        <div class="my-btn">
+                            <i style="color: #8E00AC" class="fas fa-user-slash"></i>
+                        </div>
+                    </my-badge>
                 </router-link>
-            </md-badge>
-            <md-badge :class="[{'disabled-link': !$store.getters.accountIsSet}]" class="md-square" :md-content="deletedBadge">
-                <router-link :to="{name: 'deleted'}">
-                    <div class="my-btn">
-                        <i style="color: #BE0031" class="fas fa-user-times"></i>
-                    </div>
+                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]" :to="{name: 'deleted', query: { link: this.$route.query.link }}">
+                    <my-badge :value="deletedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
+                        <div class="my-btn">
+                            <i style="color: #BE0031" class="fas fa-user-times"></i>
+                        </div>
+                    </my-badge>
                 </router-link>
-            </md-badge>
-            <md-badge :class="[{'disabled-link': !$store.getters.accountIsSet}]" class="md-square" :md-content="abandonedBadge">
-                <router-link :to="{name: 'abandoned'}">
-                    <div class="my-btn">
-                        <i style="color: #DE9B00" class="fas fa-user-clock"></i>
-                    </div>
+                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]" :to="{name: 'abandoned', query: { link: this.$route.query.link }}">
+                    <my-badge :value="abandonedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
+                        <div class="my-btn">
+                            <i style="color: #DE9B00" class="fas fa-user-clock"></i>
+                        </div>
+                    </my-badge>
                 </router-link>
-            </md-badge>
         </div>
     </div>
 </template>
 
 <script>
     import AccountManager from '../components/AccountManager'
+    import MyBadge from "./MyBadge";
 
   export default {
     name: "NavBar",
     components: {
-      AccountManager
+      AccountManager,
+      MyBadge
     },
     computed: {
       bannedBadge() {
@@ -49,6 +51,20 @@
   }
 </script>
 
+<style>
+    .badge.disabled-link .badge-container{
+        display: none;
+    }
+
+    .md-badge {
+        font-size: 11px !important;
+        font-weight: bold;
+    }
+
+    .md-square.disabled-link .md-badge {
+        display: none;
+    }
+</style>
 <style scoped>
     .disabled-link {
         pointer-events: none;
@@ -79,6 +95,7 @@
         line-height: 50px;
         transition: 0.5s;
     }
+
     .router-link-active .my-btn{
         width: 80px;
     }

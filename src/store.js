@@ -8,9 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     session: {
-      userIds: localStorage.getItem('userIds') || '',
-      userName: localStorage.getItem('userName') || '',
-      avatar: localStorage.getItem('avatar') || '',
+      userIds: '',
+      userName: '',
+      avatar:  '',
       account: {}
     },
     friendList: [],
@@ -26,23 +26,16 @@ export default new Vuex.Store({
   mutations: {
     setAccount(state, account) {
       const fullName = `${account.first_name} ${account.last_name}`
-      const id = account.id
-      state.session.userIds = id
+      state.session.userIds = account.id
       state.session.userName = fullName
       state.session.avatar = account.avatar
       state.session.account = account
-      localStorage.setItem('userIds', id)
-      localStorage.setItem('userName', fullName)
-      localStorage.setItem('avatar', account.avatar)
     },
     resetAccount(state) {
       state.session.userIds = ''
       state.session.userName = ''
       state.session.avatar = ''
       state.session.account = {}
-      localStorage.removeItem('avatar')
-      localStorage.removeItem('userIds')
-      localStorage.removeItem('userName')
     },
     setError(state, {form, errors}) {
       state.errors[form] = errors
@@ -66,6 +59,12 @@ export default new Vuex.Store({
     },
     setFetchSate(state, boolean) {
       state.fetched = boolean
+    },
+    resetFriendsLists(state) {
+      state.friendList = []
+      state.bannedFriends = []
+      state.deletedFriends = []
+      state.abandonedFriends = []
     }
   },
   getters: {
@@ -88,6 +87,7 @@ export default new Vuex.Store({
     },
     async fetchAllFriends({dispatch, commit}, user_ids) {
       commit('setLoading', true)
+      commit('resetFriendsLists')
       await dispatch('fetchBannedFriends', user_ids)
       await dispatch('fetchDeletedFriends', user_ids)
       await dispatch('fetchAbandonedFriends', user_ids)

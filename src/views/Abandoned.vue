@@ -3,7 +3,7 @@
         <user-cards-list
                 :show-meta="true"
                 category="Забросившие аккаунт"
-                :user-card-list="abandonedFriends"></user-cards-list>
+                :user-card-list="abandonedFriends"/>
     </div>
 </template>
 

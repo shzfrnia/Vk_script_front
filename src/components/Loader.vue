@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="loader-container">
             <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
 </template>
@@ -11,7 +11,7 @@
 </script>
 
 <style scoped>
-    .container {
+    .loader-container {
         margin-top: 10vw;
         text-align: center;
     }
