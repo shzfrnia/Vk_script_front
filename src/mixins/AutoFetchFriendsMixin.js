@@ -12,10 +12,5 @@ export default {
       }
       await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
     }
-    if (this.$store.getters.accountIsSet) {
-      await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
-    } else {
-      this.$router.push({name:'home'})
-    }
   }
 }
