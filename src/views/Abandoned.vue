@@ -8,7 +8,7 @@
         <user-cards-list
                 :show-meta="true"
                 category="Забросившие аккаунт"
-                :user-card-list="sortFriendBy"></user-cards-list>
+                :user-card-list="abandonedFriends"/>
     </div>
 </template>
 

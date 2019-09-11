@@ -8,9 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     session: {
-      userIds: localStorage.getItem('userIds') || '',
-      userName: localStorage.getItem('userName') || '',
-      avatar: localStorage.getItem('avatar') || '',
+      userIds: '',
+      userName: '',
+      avatar:  '',
       account: {}
     },
     friendList: [],
@@ -26,23 +26,16 @@ export default new Vuex.Store({
   mutations: {
     setAccount(state, account) {
       const fullName = `${account.first_name} ${account.last_name}`
-      const id = account.id
-      state.session.userIds = id
+      state.session.userIds = account.id
       state.session.userName = fullName
       state.session.avatar = account.avatar
       state.session.account = account
-      localStorage.setItem('userIds', id)
-      localStorage.setItem('userName', fullName)
-      localStorage.setItem('avatar', account.avatar)
     },
     resetAccount(state) {
       state.session.userIds = ''
       state.session.userName = ''
       state.session.avatar = ''
       state.session.account = {}
-      localStorage.removeItem('avatar')
-      localStorage.removeItem('userIds')
-      localStorage.removeItem('userName')
     },
     setError(state, {form, errors}) {
       state.errors[form] = errors

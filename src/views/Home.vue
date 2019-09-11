@@ -1,42 +1,46 @@
 <template>
     <div style="margin-top: 30vh" class="md-layout md-gutter md-alignment-center-center">
-        <div class="md-layout-item md-size-20"></div>
         <div class="md-layout md-alignment-center-center">
-            <md-field>
-                <label>Ссылка на профиль</label>
-                <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
-            </md-field>
-            <div style="display: flex" class="md-layout-item md-size-100">
-                <md-button style="margin:0 auto" @click="setAccount()" class="md-raised ">Сканировать аккаунт</md-button>
+            <div class="md-layout-item md-size-50">
+                <md-field>
+                    <label>Ссылка на профиль</label>
+                    <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
+                </md-field>
+                <div class="md-layout md-size-100 md-alignment-center-center">
+                    <md-button @click="setAccount()" class="md-raised">Сканировать аккаунт</md-button>
+                </div>
+                <div class="md-layout md-size-100 md-alignment-center-center">
+                    <fade-effect :show="hasError">
+                        <p class="error-text">{{errorMsg}}</p>
+                    </fade-effect>
+                </div>
             </div>
-            <transition name="fade">
-                            <p v-if="hasError"
-                               class="error-text">{{errorMsg}}</p>
-            </transition>
         </div>
-        <div class="md-layout-item md-size-20"></div>
     </div>
 </template>
 
 <script>
   import AutoFetchFriendsMixin from '../mixins/AutoFetchFriendsMixin'
+  import FadeEffect from "../components/FadeEffect";
 
   export default {
     name: "home",
+    components: {FadeEffect},
     mixins: [
-        AutoFetchFriendsMixin
+        AutoFetchFriendsMixin,
+        FadeEffect
     ],
     data() {
       return {
-        account_link: ''
+        account_link: this.$route.query.link
       }
     },
     computed: {
       hasError() {
-        return this.$store.state.errors.setAccount !== ''
+        return this.errorMsg !== ''
       },
       errorMsg() {
-        return this.hasError ? this.$store.state.errors.setAccount : ""
+        return this.$store.state.errors.setAccount
       },
       getIdsFromAccountLink() {
         const UrlIndex = this.account_link.search(/vk.com/)
@@ -49,8 +53,11 @@
       async setAccount() {
         this.$store.commit('resetAccount')
         await this.$store.dispatch('setAccount', this.getIdsFromAccountLink)
+        this.$router.push({ name: 'home', query: { link: this.getIdsFromAccountLink }})
         if (this.$store.getters.accountIsSet) {
           await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
+        } else {
+          this.$router.push({ name: 'home'})
         }
       },
       clearError() {
@@ -65,13 +72,6 @@
 </script>
 
 <style scoped>
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .2s;
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-        opacity: 0;
-    }
-
     .md-field:after {
         height: 2px;
         background: black;
@@ -96,6 +96,7 @@
         font-size: 30px;
         color:red;
     }
+
     .md-focused * {
       color: black !important;
     }
