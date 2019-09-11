@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link :to="{name: 'home'}">
+        <router-link :to="{name: 'home', query: { link: this.$route.query.link } }">
             <div class="my-btn" :class="nameNeedShow ? 'name-expanded' : 'name-hidden'">
                 <avatar v-if="$store.getters.accountIsSet" :url="$store.state.session.avatar"/>
                 <i v-else class="fas fa-user"></i>
@@ -42,15 +42,20 @@
         justify-content: center;
         align-items: center;
         padding: 0 10px 0 10px;
+        min-width: 50px;
         height: 50px;
         margin: 5px;
         font-size: 25px;
         color: gray;
         border-radius: 25px;
         background-color: white;
-        /*transition: 7s;*/
+        transition: .5s;
         overflow: hidden;
     }
+
+    /*.my-btn.name-hidden {*/
+    /*    width: 50px;*/
+    /*}*/
 
     .nickname {
         text-align: center;
