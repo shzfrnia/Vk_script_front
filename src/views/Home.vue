@@ -32,7 +32,7 @@
     ],
     data() {
       return {
-        account_link: ''
+        account_link: this.$route.query.link
       }
     },
     computed: {
@@ -53,8 +53,11 @@
       async setAccount() {
         this.$store.commit('resetAccount')
         await this.$store.dispatch('setAccount', this.getIdsFromAccountLink)
+        this.$router.push({ name: 'home', query: { link: this.getIdsFromAccountLink }})
         if (this.$store.getters.accountIsSet) {
           await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
+        } else {
+          this.$router.push({ name: 'home'})
         }
       },
       clearError() {
