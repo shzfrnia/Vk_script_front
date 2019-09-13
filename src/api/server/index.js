@@ -6,7 +6,8 @@ const API_ROUTES = {
   'user': `${API_ENDPINT}/user`,
   'banned': `${API_ENDPINT}/user/banned_friends`,
   'deleted': `${API_ENDPINT}/user/deleted_friends`,
-  'abandoned': `${API_ENDPINT}/user/abandoned_friends`
+  'abandoned': `${API_ENDPINT}/user/abandoned_friends`,
+  'friendsList': `${API_ENDPINT}/user/friends`
 }
 
 
@@ -40,7 +41,16 @@ export class UserAPI {
 
   static async getAbandonedFriends(user_ids) {
     try {
-      const result = await axios.get(API_ROUTES.abandoned,{params: {user_ids: user_ids}})
+      const result = await axios.get(API_ROUTES.abandoned,{params: {user_ids: user_ids, days_offline: 999}})
+      return result.data
+    } catch (e) {
+      throw {error: e}
+    }
+  }
+
+  static async getFriendsList(user_ids) {
+    try {
+      const result = await axios.get(API_ROUTES.friendsList,{params: {user_ids: user_ids}})
       return result.data
     } catch (e) {
       throw {error: e}

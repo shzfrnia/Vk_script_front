@@ -20,7 +20,7 @@
       },
       computed: {
         deletedFriends() {
-          return this.$store.state.deletedFriends
+          return this.$store.getters.deletedFriends
         }
       }
     }

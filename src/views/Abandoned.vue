@@ -21,7 +21,7 @@
     },
     computed: {
       abandonedFriends() {
-        return this.$store.state.abandonedFriends
+        return this.$store.getters.abandonedFriends
       }
     }
   }

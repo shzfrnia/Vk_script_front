@@ -20,7 +20,7 @@
     },
     computed: {
       bannedFriends() {
-        return this.$store.state.bannedFriends
+        return this.$store.getters.bannedFriends
       }
     }
   }

@@ -53,7 +53,7 @@
       async setAccount() {
         this.$store.commit('resetAccount')
         await this.$store.dispatch('setAccount', this.getIdsFromAccountLink)
-        this.$router.push({ name: 'home', query: { link: this.getIdsFromAccountLink }})
+        this.$router.push({ name: 'home', query: { link: this.getIdsFromAccountLink, days_offline: this.$store.state.daysOffline }})
         if (this.$store.getters.accountIsSet) {
           await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
         } else {
