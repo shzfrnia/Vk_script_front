@@ -32,36 +32,6 @@
     computed: {
       abandonedFriends() {
         return this.$store.getters.abandonedFriends
-      sortByLess() {
-      },
-        const arrToSort = [...this.$store.state.abandonedFriends]
-        return arrToSort.sort((one, other) => {
-            if (one.days_offline > other.days_offline) {
-              return -1
-            } else {
-              return 1
-            }
-          })
-      },
-      sortByBig() {
-        const arrToSort = [...this.$store.state.abandonedFriends]
-        return arrToSort.sort((one, other) => {
-          if (one.days_offline < other.days_offline) {
-            return -1
-          } else {
-            return 1
-          }
-        }
-        } else {
-          return this.sortByBig
-       else  if (this.sortBy === 'big') {
-        }
-          return this.sortByLess
-        if (this.sortBy === 'less') {
-      sortFriendBy() {
-      },
-        })
-          }
       }
     }
   }
