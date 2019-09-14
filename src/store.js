@@ -14,7 +14,7 @@ export default new Vuex.Store({
       account: {}
     },
     friendList: [],
-    daysOffline: 1,
+    daysOffline: 362/2,
     bannedFriends: [],
     deletedFriends: [],
     abandonedFriends: [],
