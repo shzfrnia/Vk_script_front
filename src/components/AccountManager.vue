@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link :to="{name: 'home', query: { link: this.$route.query.link } }">
+        <router-link :to="{name: 'home', query: { link: this.$route.query.link, days_offline: this.$route.query.days_offline } }">
             <div class="my-btn" :class="nameNeedShow ? 'name-expanded' : 'name-hidden'">
                 <avatar v-if="$store.getters.accountIsSet" :url="$store.state.session.avatar"/>
                 <i v-else class="fas fa-user"></i>

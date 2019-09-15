@@ -14,6 +14,7 @@ export default new Vuex.Store({
       account: {}
     },
     friendList: [],
+    daysOffline: 362/2,
     bannedFriends: [],
     deletedFriends: [],
     abandonedFriends: [],
@@ -40,10 +41,16 @@ export default new Vuex.Store({
     setError(state, {form, errors}) {
       state.errors[form] = errors
     },
+    setDaysOffline(state, daysOffline) {
+      state.daysOffline = daysOffline
+    },
     clearErrors(state) {
       for (const form in state.errors) {
         state.errors[form] = ""
       }
+    },
+    setFriendsList(state, friends) {
+      state.friendList = friends
     },
     setBannedFriends(state, friends) {
       state.bannedFriends = friends
@@ -73,6 +80,18 @@ export default new Vuex.Store({
     },
     accountName(state) {
       return state.session.userName || ''
+    },
+    bannedFriends(state) {
+      const bannedFriends = state.friendList.filter(friend => friend.is_deactivated == 'banned')
+      return bannedFriends
+    },
+    deletedFriends(state) {
+      const deletedFriends = state.friendList.filter(friend => friend.is_deactivated == 'deleted')
+      return deletedFriends
+    },
+    abandonedFriends(state) {
+      const abandonedFriends = state.friendList.filter(friend => friend.days_offline >= state.daysOffline)
+      return abandonedFriends
     }
   },
   actions: {
@@ -85,12 +104,18 @@ export default new Vuex.Store({
         commit('setError', {form:'setAccount', errors: e.error})
       }
     },
-    async fetchAllFriends({dispatch, commit}, user_ids) {
+    async fetchAllFriends({commit}, user_ids) {
       commit('setLoading', true)
       commit('resetFriendsLists')
-      await dispatch('fetchBannedFriends', user_ids)
-      await dispatch('fetchDeletedFriends', user_ids)
-      await dispatch('fetchAbandonedFriends', user_ids)
+      try {
+        const friendList = await UserAPI.getFriendsList(user_ids)
+        commit("setFriendsList", friendList)
+      } catch (e) {
+        commit('setError',{form:'bannedFriends', errors: e.error})
+      }
+      // await dispatch('fetchBannedFriends', user_ids)
+      // await dispatch('fetchDeletedFriends', user_ids)
+      // await dispatch('fetchAbandonedFriends', user_ids)
       commit('setLoading', false)
       commit('setFetchSate', true)
     },
