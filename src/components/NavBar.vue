@@ -2,21 +2,24 @@
     <div id="nav">
         <div class="my-btn-container">
             <account-manager></account-manager>
-                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]" :to="{name: 'banned', query: { link: this.$route.query.link }}">
+                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]"
+                             :to="{name: 'banned', query: { link: this.$route.query.link, days_offline: this.$store.state.daysOffline }}">
                     <my-badge :value="bannedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
                         <div class="my-btn">
                             <i style="color: #8E00AC" class="fas fa-user-slash"></i>
                         </div>
                     </my-badge>
                 </router-link>
-                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]" :to="{name: 'deleted', query: { link: this.$route.query.link }}">
+                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]"
+                             :to="{name: 'deleted', query: { link: this.$route.query.link, days_offline: this.$store.state.daysOffline }}">
                     <my-badge :value="deletedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
                         <div class="my-btn">
                             <i style="color: #BE0031" class="fas fa-user-times"></i>
                         </div>
                     </my-badge>
                 </router-link>
-                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]" :to="{name: 'abandoned', query: { link: this.$route.query.link }}">
+                <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]"
+                             :to="{name: 'abandoned', query: { link: this.$route.query.link, days_offline: this.$store.state.daysOffline }}">
                     <my-badge :value="abandonedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
                         <div class="my-btn">
                             <i style="color: #DE9B00" class="fas fa-user-clock"></i>
@@ -39,13 +42,13 @@
     },
     computed: {
       bannedBadge() {
-        return this.$store.state.bannedFriends.length
+        return this.$store.getters.bannedFriends.length
       },
       abandonedBadge() {
-        return this.$store.state.abandonedFriends.length
+        return this.$store.getters.abandonedFriends.length
       },
       deletedBadge() {
-        return this.$store.state.deletedFriends.length
+        return this.$store.getters.deletedFriends.length
       }
     }
   }
