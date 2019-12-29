@@ -4,7 +4,7 @@
             <div v-if="showLoader" class="loader">Loading...</div>
             <p v-else class="value">{{value}}</p>
         </div>
-        <slot></slot>
+        <slot />
     </div>
 </template>
 

@@ -11,6 +11,7 @@ export class UserAPI {
         }
     }
 
+  // eslint-disable-next-line no-unused-vars
     static async getBannedFriends(user_ids) {
       if (UserAPI.foo()) {
         const friends = FakeFriends
@@ -20,6 +21,7 @@ export class UserAPI {
       }
     }
 
+  // eslint-disable-next-line no-unused-vars
     static async getDeletedFriends(user_ids) {
       if (UserAPI.foo()) {
         const friends = FakeFriends
@@ -29,6 +31,7 @@ export class UserAPI {
       }
     }
 
+  // eslint-disable-next-line no-unused-vars
     static async getAbandonedFriends(user_ids) {
       if (UserAPI.foo()) {
         const friends = FakeFriends
