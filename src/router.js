@@ -10,7 +10,10 @@ export default new Router({
   routes: [
     {
       path: '*',
-      component: () => import('./views/404.vue')
+      component: () => import('./views/404.vue'),
+      meta: {
+        bkColor: "#3EAF6F"
+      }
     },
     {
       path: '/',
