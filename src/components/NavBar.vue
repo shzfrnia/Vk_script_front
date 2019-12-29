@@ -79,7 +79,7 @@
 
     .my-btn-container {
         display: flex;
-        min-height: 80px;
+        min-height: 90px;
         align-items: center;
         justify-content: center;
     }
