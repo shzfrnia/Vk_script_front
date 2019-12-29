@@ -1,25 +1,41 @@
 export default {
   async created() {
-    if (this.$store.state.fetched) {
+    const dataIsFetched = this.$store.state.fetched;
+    if (dataIsFetched) {
       return
     }
-    const link = this.$route.query.link
-    const daysOffline  = this.$route.query.days_offline
+
+    const link = this.$route.query.link;
+    const daysOffline = this.$route.query.days_offline;
+
     if (link) {
-      try {
-        if (daysOffline) {
-          this.$router.push({ name: 'abandoned', query: { link: link, days_offline: daysOffline }})
-          this.$store.commit('setDaysOffline', daysOffline)
-        } else {
-          this.$store.commit('setDaysOffline', 362/2)
-        }
-        await this.$store.dispatch('setAccount', link)
-      } catch (e) {
-        this.$router.push({name: 'home'})
-      }
-      await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
+      this.tryToSetUpAccount(link, daysOffline)
     } else {
-      this.$router.push({name: 'home'})
+      this.redirectToHome()
+    }
+  },
+  methods: {
+    setUpDaysOfflineValue(days) {
+      if (days) {
+        this.$store.commit('setDaysOffline', days)
+      } else {
+        this.$store.commit('setDaysOffline', days)
+      }
+    },
+    async setUpAccount(link) {
+      await this.$store.dispatch('setAccount', link)
+    },
+    async redirectToHome() {
+      await this.$router.push({name: 'home'})
+    },
+    async tryToSetUpAccount(link, daysOffline) {
+      try {
+        this.setUpAccount(link);
+        this.setUpDaysOfflineValue(daysOffline);
+        await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
+      } catch (e) {
+        this.redirectToHome()
+      }
     }
   }
 }

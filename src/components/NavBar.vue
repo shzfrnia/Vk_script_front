@@ -1,7 +1,7 @@
 <template>
     <div id="nav">
         <div class="my-btn-container">
-            <account-manager></account-manager>
+            <account-manager />
                 <router-link :class="[{'disabled-link': !$store.getters.accountIsSet}]"
                              :to="{name: 'banned', query: { link: this.$route.query.link, days_offline: this.$store.state.daysOffline }}">
                     <my-badge :value="bannedBadge" :class="[{'disabled-link': !$store.getters.accountIsSet}]">
