@@ -1,0 +1,43 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+#         node-version: [8.x, 10.x, 12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - name: clone backend
+      run: mkdir "vk-script-backend"
+    - run: git clone https://github.com/shzfrnia/vk-script-backend.git "vk-script-backend"
+    - name: auth git user
+      run: git config --global user.email "pugumo68@gmail.com"
+    - run: git config --global user.name "shzfrnia"
+    - run: git config --global user.token "${{ secrets.GIT_TOKEN }}"
+#     - run: cd vk-script-backend && git remote add origin https://${{secrets.GIT_LOGIN}}:${{secrets.GIT_PASSWORD}}@github.com/shzfrnia/vk-script-backend.git
+    - name: build project
+      run: npm run-script build
+    - name: Delete old dist
+      run: rm -r vk-script-backend/dist
+    - name: Copy dist to backend
+      run: cp -R dist vk-script-backend
+    - name: Stage all changes
+      run: cd vk-script-backend && git add -A
+    - name: commit all changes
+      run: cd vk-script-backend && git commit -a -m 'Update front-end'
+    - name: Push all changes
+      run: cd vk-script-backend && git push "https://shzfrnia:${{secrets.GIT_TOKEN}}@github.com/shzfrnia/vk-script-backend.git"
+      env:
+        CI: true
