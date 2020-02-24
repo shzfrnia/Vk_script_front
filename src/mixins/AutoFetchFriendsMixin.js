@@ -32,6 +32,9 @@ export default {
       try {
         this.setUpAccount(link);
         this.setUpDaysOfflineValue(daysOffline);
+        if (!this.$store.getters.accountIsSet) {
+          throw Error("Account not found")
+        }
         await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
       } catch (e) {
         this.redirectToHome()
