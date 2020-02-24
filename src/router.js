@@ -9,20 +9,20 @@ async function tryToSetUpAccount(link, daysOffline) {
   store.commit('setDaysOffline', daysOffline)
 }
 
-
 const redirectIfAccountIsNotSet = async(to, from, next) => {
   const accountLink = to.query.link;
-  const daysOffline =  to.query.days_offline;
-  if(!store.getters.accountIsSet) {
+  const daysOffline = to.query.days_offline;
+  if(!store.getters.accountIsSet && daysOffline && accountLink) {
     await tryToSetUpAccount(accountLink, daysOffline);
+    if(store.getters.accountIsSet) {
+      next({name: to.name, query: {link:accountLink, days_offline:daysOffline}})
+      if(!store.state.fetched) store.dispatch('fetchAllFriends', store.state.session.userIds).then(()=>{});
+      return
+    } else {
+      next("/")
+    }
   }
-  if(store.getters.accountIsSet) {
-    if (to.name === "Home" && from.name !== "Home") { next({name: "home", query: {link: accountLink, days_offline: daysOffline}}) }
-    if(!store.state.fetched) store.dispatch('fetchAllFriends', store.state.session.userIds).then(()=>{});
-    next();
-    return
-  }
-  next('/')
+  next()
 }
 
 export default new Router({
