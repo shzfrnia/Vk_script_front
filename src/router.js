@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -10,7 +9,7 @@ export default new Router({
   routes: [
     {
       path: '*',
-      component: () => import('./views/404.vue'),
+      component: () => import('./views/page404.vue'),
       meta: {
         bkColor: "#3EAF6F"
       }
@@ -18,7 +17,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: () => import('./views/Home.vue'),
       meta: {
         bkColor: "#3EAF6F"
       }
