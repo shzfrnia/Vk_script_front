@@ -14,14 +14,11 @@
     @import url(https://fonts.googleapis.com/css?family=Monoton);
 
     .container {
-        margin-top: -70px;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height: 90vh;
         width: 100%;
-        z-index: -1;
-        background: #42b983;
         font-family: 'Monoton', cursive;
     }
 
