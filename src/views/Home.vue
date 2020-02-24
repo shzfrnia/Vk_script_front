@@ -20,16 +20,11 @@
 </template>
 
 <script>
-  import AutoFetchFriendsMixin from '../mixins/AutoFetchFriendsMixin'
   import FadeEffect from "../components/FadeEffect";
 
   export default {
     name: "home",
     components: {FadeEffect},
-    mixins: [
-        AutoFetchFriendsMixin,
-        FadeEffect
-    ],
     data() {
       return {
         account_link: this.$route.query.link
