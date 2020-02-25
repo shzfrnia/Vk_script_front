@@ -1,20 +1,24 @@
 <template>
     <div style="margin-top: 30vh" class="md-layout md-gutter md-alignment-center-center">
         <div class="md-layout md-alignment-center-center">
-            <div class="md-layout-item md-size-50">
+            <form class="md-layout-item md-size-50" @submit.prevent="setAccount">
                 <md-field>
                     <label>Ссылка на профиль</label>
-                    <md-input @keydown.enter="setAccount()" @input="clearError()" v-model="account_link"></md-input>
+                    <md-input
+                        required
+                        @keydown.enter="setAccount()"
+                        @input="clearError()"
+                        v-model="account_link" />
                 </md-field>
                 <div class="md-layout md-size-100 md-alignment-center-center">
-                    <md-button @click="setAccount()" class="md-raised">Сканировать аккаунт</md-button>
+                    <md-button type="submit" class="md-raised">Сканировать аккаунт</md-button>
                 </div>
                 <div class="md-layout md-size-100 md-alignment-center-center">
                     <fade-effect :show="hasError">
                         <p class="error-text">{{errorMsg}}</p>
                     </fade-effect>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </template>
@@ -98,5 +102,9 @@
 
     .md-field.md-theme-default:before {
       background: none;
+    }
+
+    .md-field.md-required label:after {
+        content: "" !important;
     }
 </style>
