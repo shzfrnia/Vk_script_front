@@ -1,110 +1,136 @@
 <template>
-    <div style="margin-top: 30vh" class="md-layout md-gutter md-alignment-center-center">
-        <div class="md-layout md-alignment-center-center">
-            <form class="md-layout-item md-size-50" @submit.prevent="setAccount">
-                <md-field>
-                    <label>Ссылка на профиль</label>
-                    <md-input
-                        required
-                        @keydown.enter="setAccount()"
-                        @input="clearError()"
-                        v-model="account_link" />
-                </md-field>
-                <div class="md-layout md-size-100 md-alignment-center-center">
-                    <md-button type="submit" class="md-raised">Сканировать аккаунт</md-button>
-                </div>
-                <div class="md-layout md-size-100 md-alignment-center-center">
-                    <fade-effect :show="hasError">
-                        <p class="error-text">{{errorMsg}}</p>
-                    </fade-effect>
-                </div>
-            </form>
+  <div style="margin-top: 30vh" class="md-layout md-gutter md-alignment-center-center">
+    <div class="md-layout md-alignment-center-center">
+      <form class="md-layout-item md-size-50" @submit.prevent="setUpAccount">
+        <md-field>
+          <label>Ссылка на профиль</label>
+          <md-input
+              required
+              @input="clearErrors"
+              v-model="accountLink" />
+        </md-field>
+        <div class="md-layout md-size-100 md-alignment-center-center">
+          <md-button type="submit" class="md-raised">Сканировать аккаунт</md-button>
         </div>
+        <div class="md-layout md-size-100 md-alignment-center-center">
+          <fade-effect :show="hasError">
+            <p class="error-text">{{errorMsg}}</p>
+          </fade-effect>
+        </div>
+      </form>
     </div>
+  </div>
 </template>
 
 <script>
   import FadeEffect from "../components/FadeEffect";
+  import {mapActions, mapState, mapMutations, mapGetters} from 'vuex';
 
   export default {
     name: "home",
     components: {FadeEffect},
     data() {
       return {
-        account_link: this.$route.query.link
+        accountLink: this.$route.query.link
       }
     },
     computed: {
+      ...mapState('friends', [
+        'daysOffline'
+      ]),
+      ...mapGetters('account', [
+        'accountIsSet'
+      ]),
+      ...mapState('account', [
+        'session'
+      ]),
+      ...mapState('errors', [
+        'errors'
+      ]),
       hasError() {
         return this.errorMsg !== ''
       },
       errorMsg() {
-        return this.$store.state.errors.setAccount
+        return this.errors.setAccount
       },
       getIdsFromAccountLink() {
-        const UrlIndex = this.account_link.search(/vk.com/)
-        if (UrlIndex === -1 ) return this.account_link  //ids not found try return user's input bec he can input id without link
-        const ids = this.account_link.slice(UrlIndex + 'vk.com'.length + 1)
-        return ids
+        const UrlIndex = this.accountLink.search(/vk.com/);
+        if (UrlIndex === -1 ) return this.accountLink; //ids not found try return user's input bec he can input id without link
+        return this.accountLink.slice(UrlIndex + 'vk.com'.length + 1);
       }
     },
     methods: {
-      async setAccount() {
-        this.$store.commit('resetAccount')
-        await this.$store.dispatch('setAccount', this.getIdsFromAccountLink)
-        this.$router.push({ name: 'home', query: { link: this.getIdsFromAccountLink, days_offline: this.$store.state.daysOffline }})
-        if (this.$store.getters.accountIsSet) {
-          await this.$store.dispatch('fetchAllFriends', this.$store.state.session.userIds)
-        } else {
-          this.$router.push({ name: 'home'})
+      ...mapActions('account', [
+        'setAccount'
+      ]),
+      ...mapMutations('account', [
+        'resetAccount'
+      ]),
+      ...mapActions('friends', [
+        'fetchAllFriends'
+      ]),
+      ...mapMutations('errors', [
+        'setError',
+        'clearErrors'
+      ]),
+      async setUpAccount() {
+        this.resetAccount();
+        try {
+          await this.setAccount(this.getIdsFromAccountLink);
+        } catch(e) {
+          this.resetAccount();
+          this.setError({form:'setAccount', errors: e})
         }
-      },
-      clearError() {
-        this.$store.commit('clearErrors')
+        await this.$router.push({ name: 'home', query: { link: this.getIdsFromAccountLink.toString(), days_offline: this.daysOffline }});
+        if (this.accountIsSet) {
+          this.$store.commit('setLoading', true);
+          await this.fetchAllFriends(this.session.userIds);
+          this.$store.commit('setLoading', false);
+        }
       }
     },
     beforeRouteLeave(to, from, next) {
-      this.clearError()
+      this.clearErrors();
       next()
     }
   }
 </script>
 
 <style scoped>
-    .md-field:after {
-        height: 2px;
-        background: black;
-    }
+  .md-field:after {
+    height: 2px;
+    background: black;
+  }
 
-    .md-input {
-        text-align: center;
-    }
+  .md-input {
+    text-align: center;
+  }
 
-    .md-field label {
-        right: 0;
-        text-align: center;
-        color: black;
-    }
+  .md-field label {
+    right: 0;
+    text-align: center;
+    color: black;
+  }
 
-    .md-button {
-        outline: none;
-        background: none !important;
-    }
+  .md-button {
+    outline: none;
+    background: none !important;
+  }
 
-    .error-text {
-        font-size: 30px;
-        color:red;
-    }
+  .error-text {
+    font-size: 30px;
+    color:red;
+  }
 
-    .md-focused * {
-      color: black !important;
-    }
+  .md-focused * {
+    color: black !important;
+  }
 
-    .md-field.md-theme-default:before {
-      background: none;
-    }
+  .md-field.md-theme-default:before {
+    background: none;
+  }
 
-    .md-field.md-required label:after {
-        content: "" !important;
-    }
+  .md-field.md-required label:after {
+    content: "" !important;
+  }
 </style>

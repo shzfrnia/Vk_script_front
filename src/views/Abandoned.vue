@@ -30,6 +30,7 @@
 
 <script>
   import UserCardsList from '../components/UserCardsList'
+  import {mapGetters, mapMutations} from 'vuex'
 
   export default {
     name: "Abandoned",
@@ -43,9 +44,9 @@
       UserCardsList
     },
     computed: {
-      abandonedFriends() {
-        return this.$store.getters.abandonedFriends
-      },
+      ...mapGetters('friends', [
+        'abandonedFriends'
+      ]),
       sortedAbandonedFriendsBy() {
         if (this.sortBy === 'less') {
           return this.sortByLess
@@ -81,16 +82,21 @@
         return arrToSort
       },
     },
+    methods: {
+      ...mapMutations('friends', [
+        'setDaysOffline'
+      ])
+    },
     watch: {
       daysOffline(value) {
-        if (value !== this.$store.state.daysOffline) {
+        if (value !== this.$store.state.friends.daysOffline) {
           this.$router.push({ name: 'abandoned', query: { link: this.$route.query.link, days_offline: value }})
+          this.setDaysOffline(value)
         }
-        this.$store.commit('setDaysOffline', value)
       }
     },
     created() {
-      this.daysOffline = this.$store.state.daysOffline
+      this.daysOffline = this.$store.state.friends.daysOffline
     }
   }
 </script>
