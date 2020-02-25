@@ -8,6 +8,7 @@
 
 <script>
   import UserCardsList from '../components/UserCardsList'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: "Banned",
@@ -15,9 +16,9 @@
       UserCardsList
     },
     computed: {
-      bannedFriends() {
-        return this.$store.getters.bannedFriends
-      }
+      ...mapGetters('friends', [
+        'bannedFriends'
+      ])
     }
   }
 </script>
