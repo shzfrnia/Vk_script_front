@@ -1,22 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from './store'
+import store from './store/index'
 
 Vue.use(Router)
 
 async function tryToSetUpAccount(link, daysOffline) {
-  await store.dispatch('setAccount', link)
-  store.commit('setDaysOffline', daysOffline)
+  try {
+    await store.dispatch('account/setAccount',link);
+    store.commit('friends/setDaysOffline', daysOffline)
+  } catch (e) {
+    store.commit('errors/setError', {form: 'setAccount', errors: e})
+  }
 }
 
 const redirectIfAccountIsNotSet = async(to, from, next) => {
   const accountLink = to.query.link;
   const daysOffline = to.query.days_offline;
-  if(!store.getters.accountIsSet && daysOffline && accountLink) {
+  if(!store.getters['account/accountIsSet'] && daysOffline && accountLink) {
     await tryToSetUpAccount(accountLink, daysOffline);
-    if(store.getters.accountIsSet) {
+    if(store.getters['account/accountIsSet']) {
       next({name: to.name, query: {link:accountLink, days_offline:daysOffline}})
-      if(!store.state.fetched) store.dispatch('fetchAllFriends', store.state.session.userIds).then(()=>{});
+      if(!store.state.friends.friendsFetched) {
+        store.commit('setLoading', true)
+        await store.dispatch('friends/fetchAllFriends', store.state.account.session.userIds)
+        store.commit('setLoading', false)
+      }
       return
     } else {
       next("/")
