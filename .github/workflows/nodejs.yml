@@ -1,6 +1,9 @@
 name: Auto-update dist on backend
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
 
 jobs:
   build:
