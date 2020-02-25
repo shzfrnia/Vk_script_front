@@ -82,16 +82,13 @@ export default new Vuex.Store({
       return state.session.userName || ''
     },
     bannedFriends(state) {
-      const bannedFriends = state.friendList.filter(friend => friend.is_deactivated == 'banned')
-      return bannedFriends
+      return state.friendList.filter(friend => friend.is_deactivated === 'banned')
     },
     deletedFriends(state) {
-      const deletedFriends = state.friendList.filter(friend => friend.is_deactivated == 'deleted')
-      return deletedFriends
+      return state.friendList.filter(friend => friend.is_deactivated === 'deleted')
     },
     abandonedFriends(state) {
-      const abandonedFriends = state.friendList.filter(friend => friend.days_offline >= state.daysOffline)
-      return abandonedFriends
+      return state.friendList.filter(friend => friend.days_offline >= state.daysOffline)
     }
   },
   actions: {
@@ -111,11 +108,8 @@ export default new Vuex.Store({
         const friendList = await UserAPI.getFriendsList(user_ids)
         commit("setFriendsList", friendList)
       } catch (e) {
-        commit('setError',{form:'bannedFriends', errors: e.error})
+        commit('setError', {form:'bannedFriends', errors: e.error})
       }
-      // await dispatch('fetchBannedFriends', user_ids)
-      // await dispatch('fetchDeletedFriends', user_ids)
-      // await dispatch('fetchAbandonedFriends', user_ids)
       commit('setLoading', false)
       commit('setFetchSate', true)
     },

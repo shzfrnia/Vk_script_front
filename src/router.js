@@ -1,8 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import store from './store'
 
 Vue.use(Router)
+
+async function tryToSetUpAccount(link, daysOffline) {
+  await store.dispatch('setAccount', link)
+  store.commit('setDaysOffline', daysOffline)
+}
+
+const redirectIfAccountIsNotSet = async(to, from, next) => {
+  const accountLink = to.query.link;
+  const daysOffline = to.query.days_offline;
+  if(!store.getters.accountIsSet && daysOffline && accountLink) {
+    await tryToSetUpAccount(accountLink, daysOffline);
+    if(store.getters.accountIsSet) {
+      next({name: to.name, query: {link:accountLink, days_offline:daysOffline}})
+      if(!store.state.fetched) store.dispatch('fetchAllFriends', store.state.session.userIds).then(()=>{});
+      return
+    } else {
+      next("/")
+    }
+  }
+  next()
+}
 
 export default new Router({
   mode: 'history',
@@ -10,12 +31,16 @@ export default new Router({
   routes: [
     {
       path: '*',
-      component: () => import('./views/404.vue')
+      component: () => import('./views/page404.vue'),
+      meta: {
+        bkColor: "#3EAF6F"
+      }
     },
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: () => import('./views/Home.vue'),
+      beforeEnter: redirectIfAccountIsNotSet,
       meta: {
         bkColor: "#3EAF6F"
       }
@@ -24,6 +49,7 @@ export default new Router({
       path: '/banned_friends',
       name: 'banned',
       component: () => import('./views/Banned.vue'),
+      beforeEnter: redirectIfAccountIsNotSet,
       meta: {
         bkColor: "#8E00AC"
       }
@@ -32,6 +58,7 @@ export default new Router({
       path: '/deleted_friends',
       name: 'deleted',
       component: () => import('./views/Deleted.vue'),
+      beforeEnter: redirectIfAccountIsNotSet,
       meta: {
         bkColor: "#BE0031"
       }
@@ -40,9 +67,11 @@ export default new Router({
       path: '/abandoned_friends',
       name: 'abandoned',
       component: () => import('./views/Abandoned.vue'),
+      beforeEnter: redirectIfAccountIsNotSet,
       meta: {
         bkColor: "#DE9B00"
       }
     }
   ]
 })
+

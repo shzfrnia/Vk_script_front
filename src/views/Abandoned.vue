@@ -1,36 +1,35 @@
 <template>
-    <div class="md-layout-item md-size-50 md-small-size-100">
-        <div class="md-layout md-gutter md-alignment-center-center">
-            <div class="md-layout-item md-size-30">
-                <md-field>
-                    <md-select v-model="sortBy" name="country" id="country" placeholder="sort by">
-                        <md-option value="less">По убыванию</md-option>
-                        <md-option value="big">По возрастанию</md-option>
-                        <md-option value="name">По имени</md-option>
-                    </md-select>
-                </md-field>
-            </div>
-            <div class="md-layout-item md-size-30">
-                <md-field>
-                    <label>Days offline</label>
-                    <md-input min="0" step="50" v-model="daysOffline" type="number"></md-input>
-                </md-field>
-            </div>
-        </div>
-        <div class="md-layout">
-            <user-cards-list
-                    class="md-layout-item"
-                    id="main-box"
-                    :show-meta="true"
-                    category="Забросившие аккаунт"
-                    :user-card-list="sortedAbandonedFriendsBy"/>
-        </div>
+  <div class="md-layout-item md-size-50 md-small-size-100">
+    <div class="md-layout md-gutter md-alignment-center-center">
+      <div class="md-layout-item md-size-30">
+        <md-field>
+          <md-select v-model="sortBy" name="country" id="country" placeholder="sort by">
+            <md-option value="less">По убыванию</md-option>
+            <md-option value="big">По возрастанию</md-option>
+            <md-option value="name">По имени</md-option>
+          </md-select>
+        </md-field>
+      </div>
+      <div class="md-layout-item md-size-30">
+        <md-field>
+          <label>Days offline</label>
+          <md-input min="0" step="50" v-model="daysOffline" type="number"></md-input>
+        </md-field>
+      </div>
     </div>
+    <div class="md-layout">
+      <user-cards-list
+          class="md-layout-item"
+          id="main-box"
+          :show-meta="true"
+          category="Забросившие аккаунт"
+          :user-card-list="sortedAbandonedFriendsBy"/>
+    </div>
+  </div>
 </template>
 
 <script>
   import UserCardsList from '../components/UserCardsList'
-  import AutoFetchFriendsMixin from '../mixins/AutoFetchFriendsMixin'
 
   export default {
     name: "Abandoned",
@@ -40,9 +39,6 @@
         daysOffline: null
       }
     },
-    mixins: [
-      AutoFetchFriendsMixin
-    ],
     components: {
       UserCardsList
     },
@@ -87,7 +83,9 @@
     },
     watch: {
       daysOffline(value) {
-        this.$router.push({ name: 'abandoned', query: { link: this.$route.query.link, days_offline: value }})
+        if (value !== this.$store.state.daysOffline) {
+          this.$router.push({ name: 'abandoned', query: { link: this.$route.query.link, days_offline: value }})
+        }
         this.$store.commit('setDaysOffline', value)
       }
     },
@@ -98,9 +96,9 @@
 </script>
 
 <style scoped>
-    #main-box {
-        position: relative;
-        padding: 0 10px 0 10px;
-        height: 75vh;
-    }
+  #main-box {
+    position: relative;
+    padding: 0 10px 0 10px;
+    height: 75vh;
+  }
 </style>
