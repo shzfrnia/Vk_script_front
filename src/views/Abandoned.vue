@@ -105,6 +105,6 @@
   #main-box {
     position: relative;
     padding: 0 10px 0 10px;
-    height: 75vh;
+    height: 71vh;
   }
 </style>

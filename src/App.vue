@@ -46,6 +46,10 @@
         overflow: hidden;
     }
 
+    .md-layout {
+      height: calc(100vh - 90px);
+    }
+
     .component-fade-enter-active, .component-fade-leave-active {
         transition: opacity .55s;
         opacity: 1;

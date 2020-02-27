@@ -25,8 +25,6 @@
 
 <style scoped>
     .md-layout-item {
-        position: relative;
-        padding: 0 10px 0 10px;
-        height: 88vh;
+      height: 100%;
     }
 </style>

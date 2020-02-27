@@ -126,6 +126,10 @@
     color: black !important;
   }
 
+  .md-layout {
+    height: 100%;
+  }
+
   .md-field.md-theme-default:before {
     background: none;
   }
