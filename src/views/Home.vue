@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 30vh" class="md-layout md-gutter md-alignment-center-center">
+  <div class="md-layout md-gutter md-alignment-center-center">
     <div class="md-layout md-alignment-center-center">
       <form class="md-layout-item md-size-50" @submit.prevent="setUpAccount">
         <md-field>
