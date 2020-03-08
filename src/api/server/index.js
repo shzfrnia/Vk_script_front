@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-const API_ENDPINT = '/api'
+const API_ENDPOINT = '/api'
 
 const API_ROUTES = {
-  'user': `${API_ENDPINT}/user`,
-  'banned': `${API_ENDPINT}/user/banned_friends`,
-  'deleted': `${API_ENDPINT}/user/deleted_friends`,
-  'abandoned': `${API_ENDPINT}/user/abandoned_friends`,
-  'friendsList': `${API_ENDPINT}/user/friends`
+  'user': `${API_ENDPOINT}/user`,
+  'banned': `${API_ENDPOINT}/user/banned_friends`,
+  'deleted': `${API_ENDPOINT}/user/deleted_friends`,
+  'abandoned': `${API_ENDPOINT}/user/abandoned_friends`,
+  'friendsList': `${API_ENDPOINT}/user/friends`
 }
 
 
