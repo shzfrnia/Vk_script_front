@@ -18,8 +18,7 @@
     img {
         display: inline;
         border-radius: 40px;
-        width: 35px;
-        height: 40px;
+        width: 38px;
         top: 50%;
         left: 25px;
         transform: translate(-50%, -50%);
