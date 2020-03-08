@@ -87,20 +87,20 @@
     min-width: 50px;
     text-decoration: none !important;
     max-width: 50px;
-    transition: 1s max-width ease-out;
+    transition: .9s max-width linear;
     margin: 0 5px 0 5px;
   }
 
   .link.router-link-exact-active {
-    transition: 2.5s max-width;
-    max-width: 500px;
+    transition: 1s max-width linear;
+    max-width: 300px;
   }
 
   .label {
     opacity: 0;
     position: relative;
     padding-left: 35px;
-    transition: .5s opacity ease-in;
+    transition: 1s opacity ease-in-out;
     text-align: center;
     white-space: nowrap;
   }
