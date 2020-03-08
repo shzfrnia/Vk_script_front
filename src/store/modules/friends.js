@@ -36,7 +36,6 @@ const getters = {
 
 const actions = {
   async fetchAllFriends({commit}, user_ids) {
-    // commit('setLoading', true);
     commit('resetFriendsLists');
     try {
       const friendList = await UserAPI.getFriendsList(user_ids);
@@ -44,7 +43,6 @@ const actions = {
     } catch (e) {
       commit('setError', {form:'bannedFriends', errors: e.error})
     }
-    // commit('setLoading', false);
     commit('setFetchSate', true)
   },
 };
