@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import NavBar from './components/NavBar'
+    import NavBar from './components/NavBar/NavBar'
 
     export default {
       name: "app",
@@ -44,6 +44,10 @@
         transition: 0.4s;
         height: 100vh;
         overflow: hidden;
+    }
+
+    .md-layout {
+      height: calc(100vh - 90px);
     }
 
     .component-fade-enter-active, .component-fade-leave-active {

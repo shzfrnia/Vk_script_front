@@ -56,11 +56,12 @@
 
 <style scoped>
     .md-content {
-        height: 100%;
+        height: 97%;
         overflow: auto;
     }
     .container {
         height: 100%;
+        padding: 0 10px 0 10px;
         overflow: auto;
     }
 </style>

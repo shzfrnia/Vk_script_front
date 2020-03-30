@@ -1,61 +1,14 @@
 <template>
-  <div class="badge">
-    <div class="badge-container">
-      <div v-if="showLoader" class="loader">Loading...</div>
-      <p v-else class="value">{{value}}</p>
-    </div>
-    <slot />
-  </div>
+  <div class="loader">Loading...</div>
 </template>
 
 <script>
-
   export default {
-    name: "MyBadge",
-    props: {
-      value: {
-        type: Number,
-        default: 0
-      }
-    },
-    computed: {
-      showLoader() {
-        return this.$store.state.loading
-      }
-    }
+    name: "BadgeLoader"
   }
 </script>
 
 <style scoped>
-  .badge {
-    position: relative;
-    transition: 0.3s;
-  }
-
-  .badge-container {
-    min-width: 23px;
-    transition: .3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ff5252;
-    color: white;
-    height: 18px;
-    border-radius: 3px;
-    top: -4px;
-    right: 0;
-    position: absolute;
-    margin: auto;
-    padding: 0 5px 0 5px;
-  }
-
-  .value {
-    margin: 0;
-    padding: 0;
-    font-size: 11px;
-    font-weight: bold;
-  }
-
   .loader {
     position: relative;
     font-size: 2px;
