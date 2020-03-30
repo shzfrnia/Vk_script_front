@@ -3,16 +3,17 @@
     <div class="md-layout md-gutter md-alignment-center-center">
       <div class="md-layout-item md-size-30">
         <md-field>
+          <label>{{ $t('abandoned.sortBy') }}</label>
           <md-select v-model="sortBy" name="country" id="country" placeholder="sort by">
-            <md-option value="less">По убыванию</md-option>
-            <md-option value="big">По возрастанию</md-option>
-            <md-option value="name">По имени</md-option>
+            <md-option value="less">{{$t('abandoned.filters.descending')}}</md-option>
+            <md-option value="big">{{$t('abandoned.filters.ascending')}}</md-option>
+            <md-option value="name">by {{$t('abandoned.filters.name')}}</md-option>
           </md-select>
         </md-field>
       </div>
       <div class="md-layout-item md-size-30">
         <md-field>
-          <label>Days offline</label>
+          <label>{{ $t('abandoned.daysOfflineLabel') }}</label>
           <md-input min="0" step="50" v-model="daysOffline" type="number"></md-input>
         </md-field>
       </div>
