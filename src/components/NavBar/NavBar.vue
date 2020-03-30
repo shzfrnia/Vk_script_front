@@ -43,17 +43,17 @@
           :icon="'fas fa-user-clock'"
           :icon-color="'#DE9B00'"/>
         <localization style="
-    background: white;
-    right: 0;
-    justify-content: center;
-    display: flex;
-    height: 30px;
-    opacity: .3;
-    top: 0;
-    padding: 10px;
-    position: absolute;
-    align-items: center;
-" />
+            background: white;
+            right: 0;
+            justify-content: center;
+            display: flex;
+            height: 30px;
+            opacity: .3;
+            top: 0;
+            padding: 10px;
+            position: absolute;
+            align-items: center;
+        " />
     </div>
   </div>
 </template>
