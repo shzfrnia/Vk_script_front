@@ -1,7 +1,7 @@
 <template>
   <div class="md-layout-item md-size-50 md-small-size-100">
     <user-cards-list
-        category="Удаленные"
+        :category="$t('navBar.deleted')"
         :user-card-list="deletedFriends"/>
   </div>
 </template>
@@ -13,7 +13,7 @@
   export default {
     name: "Deleted",
     components: {
-      UserCardsList
+      UserCardsList,
     },
     computed: {
       ...mapGetters('friends', [

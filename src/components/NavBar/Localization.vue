@@ -20,4 +20,7 @@ export default {
 </script>
 
 <style>
+  .md-radio:last-child {
+    margin-right: 0;
+  }
 </style>

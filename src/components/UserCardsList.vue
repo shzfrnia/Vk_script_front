@@ -12,9 +12,9 @@
         <md-empty-state
                 v-else
                 class="md-primary"
-                :md-label="category + ' друзья отсутствуют'"
+                :md-label="category + ' ' + $t('userCardsList.emptyState.emptyFriends')"
                 md-icon="done"
-                md-description="Ну или они просто скрыты. кек ¯\_(ツ)_/¯"/>
+                :md-description="$t('userCardsList.emptyState.friendsEmptyLabel') + ' ¯\\_(ツ)_/¯'"/>
     </div>
 </template>
 

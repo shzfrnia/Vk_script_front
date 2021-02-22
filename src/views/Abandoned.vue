@@ -23,7 +23,7 @@
           class="md-layout-item"
           id="main-box"
           :show-meta="true"
-          category="Забросившие аккаунт"
+          :category="$t('navBar.abandoned')"
           :user-card-list="sortedAbandonedFriendsBy"/>
     </div>
   </div>
@@ -42,7 +42,7 @@
       }
     },
     components: {
-      UserCardsList
+      UserCardsList,
     },
     computed: {
       ...mapGetters('friends', [

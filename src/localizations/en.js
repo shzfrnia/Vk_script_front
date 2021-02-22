@@ -17,5 +17,11 @@ export default {
         sortBy: "Sort by",
         daysOfflineLabel: "Days offline",
         daysOffline: "Zero days offline | One day offline| {n} days offline"
+    },
+    userCardsList: {
+        emptyState: {
+            emptyFriends: "friends absent",
+            friendsEmptyLabel: "Well, or they are just hidden"
+        }
     }
 }
