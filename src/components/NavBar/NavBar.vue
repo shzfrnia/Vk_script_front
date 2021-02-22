@@ -19,7 +19,7 @@
           :days-offline="daysOffline"
           :to="'banned'"
           :account-ava-link="session.avatar"
-          :label="'Забаненные'"
+          :label="$t('navBar.banned')"
           :icon="'fas fa-user-slash'"
           :icon-color="'#8E00AC'"/>
       <nav-bar-item
@@ -29,7 +29,7 @@
           :days-offline="daysOffline"
           :to="'deleted'"
           :account-ava-link="session.avatar"
-          :label="'Удаленные'"
+          :label="$t('navBar.deleted')"
           :icon="'fas fa-user-times'"
           :icon-color="'#BE0031'"/>
       <nav-bar-item
@@ -39,21 +39,36 @@
           :days-offline="daysOffline"
           :to="'abandoned'"
           :account-ava-link="session.avatar"
-          :label="'Потерялись'"
+          :label="$t('navBar.abandoned')"
           :icon="'fas fa-user-clock'"
           :icon-color="'#DE9B00'"/>
+        <localization style="
+            background: white;
+            right: 0;
+            justify-content: center;
+            border-bottom-left-radius: 10px;
+            display: flex;
+            height: 30px;
+            opacity: .3;
+            top: 0;
+            padding: 10px;
+            position: absolute;
+            align-items: center;
+        " />
     </div>
   </div>
 </template>
 
 <script>
   import NavBarItem from "./NavBarItem";
+  import Localization from "./Localization"
   import {mapGetters, mapState} from 'vuex';
 
   export default {
     name: "NavBar",
     components: {
-      NavBarItem
+      NavBarItem,
+      Localization
     },
     computed: {
       ...mapGetters('friends', [

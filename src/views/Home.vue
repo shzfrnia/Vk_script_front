@@ -3,14 +3,14 @@
     <div class="md-layout md-alignment-center-center">
       <form class="md-layout-item md-size-50" @submit.prevent="setUpAccount">
         <md-field>
-          <label>Ссылка на профиль</label>
+          <label>{{ $t("home.linkLabel") }}</label>
           <md-input
               required
               @input="clearErrors"
               v-model="accountLink" />
         </md-field>
         <div class="md-layout md-size-100 md-alignment-center-center">
-          <md-button type="submit" class="md-raised">Сканировать аккаунт</md-button>
+          <md-button type="submit" class="md-raised">{{ $t("home.scanAccount") }}</md-button>
         </div>
         <div class="md-layout md-size-100 md-alignment-center-center">
           <fade-effect :show="hasError">
