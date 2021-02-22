@@ -46,6 +46,7 @@
             background: white;
             right: 0;
             justify-content: center;
+            border-bottom-left-radius: 10px;
             display: flex;
             height: 30px;
             opacity: .3;
